@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ax.files — Профиль</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/app.css" />
+  <link rel="stylesheet" href="assets/profile.css" />
+
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar-curtain">
+      <div class="topbar">
+          <a href="index.html" class="logo" aria-label="ax.files — на главную"><img class="logo-img" src="assets/logo-ax.png" alt="" width="83" height="19" decoding="async" /></a>
+          <div class="topbar-mid">
+            <div class="topbar-cluster">
+              <label class="search" aria-label="Поиск">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M21 21l-4.3-4.3" />
+                </svg>
+                <input type="search" placeholder="Искать информацию" />
+              </label>
+              <nav class="nav-pills" aria-label="Основное меню">
+                <button type="button">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1v-9.5z" />
+                  </svg>
+                  <span class="nav-pills__label">Главная</span>
+                </button>
+                <a href="knowledge.html" class="nav-pills__link">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5z" />
+                    <path d="M8 2v4M12 2v4M16 2v4" />
+                  </svg>
+                  <span class="nav-pills__label">База знаний</span>
+                </a>
+                <button type="button">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <span class="nav-pills__label">Эксперты</span>
+                </button>
+              </nav>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <button type="button" class="icon-btn" aria-label="Уведомления">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+            </button>
+            <a href="profile.html" aria-label="Профиль" aria-current="page"><img class="avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&h=96&fit=crop" alt="" width="40" height="40" decoding="async" /></a>
+          </div>
+      </div>
+    </header>
+
+    <div class="shell-sheet">
+      <main class="shell-sheet__main profile-page">
+        <div class="profile-layout">
+          <aside class="profile-sidebar" aria-label="Боковая панель профиля">
+            <div class="profile-sidebar__top" aria-label="Фото и действия">
+              <div class="profile-identity-avatar-wrap">
+                <img
+                  class="profile-identity-avatar"
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=256&h=256&fit=crop"
+                  alt=""
+                    width="152"
+                    height="152"
+                  decoding="async"
+                />
+              </div>
+              <a href="profile-edit.html" class="profile-identity-edit">Редактировать профиль</a>
+            </div>
+            <div class="profile-sidebar__scroll">
+              <article class="profile-org-panel">
+                <section class="profile-org-section" aria-labelledby="managers-heading">
+                  <h2 id="managers-heading" class="profile-org-section__title">Руководители</h2>
+                  <ul class="profile-org-list">
+                    <li class="profile-org-person">
+                      <span class="profile-org-person__avatar profile-org-person__avatar--initials" aria-hidden="true">КМ</span>
+                      <div class="profile-org-person__body">
+                        <p class="profile-org-person__name">Матвей Кисляк</p>
+                        <p class="profile-org-person__role">Административный</p>
+                      </div>
+                    </li>
+                    <li class="profile-org-person">
+                      <img
+                        class="profile-org-person__avatar"
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop"
+                        alt=""
+                        width="40"
+                        height="40"
+                        decoding="async"
+                      />
+                      <div class="profile-org-person__body">
+                        <p class="profile-org-person__name">Алексей Батраков</p>
+                        <p class="profile-org-person__role">Функциональный</p>
+                      </div>
+                    </li>
+                  </ul>
+                </section>
+                <section class="profile-org-section" aria-labelledby="teams-heading">
+                  <h2 id="teams-heading" class="profile-org-section__title">Команды</h2>
+                  <button type="button" class="profile-org-teams-row">
+                    <span class="profile-org-teams-row__icon" aria-hidden="true">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                      </svg>
+                    </span>
+                    <span class="profile-org-teams-row__text">Административная, Функциональная</span>
+                    <span class="profile-org-teams-row__chevron" aria-hidden="true">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </span>
+                  </button>
+                </section>
+              </article>
+            </div>
+          </aside>
+          <div class="profile-main">
+        <section class="profile-identity" aria-label="Профиль сотрудника">
+          <div class="profile-identity-top">
+          <article class="profile-identity-card">
+              <div class="profile-identity-main">
+                <h1 class="profile-display-name">Васильева Анна Сергеевна</h1>
+                <p class="profile-meta-line">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <span>Младший аналитик</span>
+                </p>
+                <p class="profile-meta-line">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    <rect x="2" y="8" width="20" height="12" rx="2" />
+                  </svg>
+                  <span>Департамент Бизнес-анализа</span>
+                </p>
+                <div class="profile-contacts">
+                  <a href="#" class="profile-contact-chip">
+                    <span class="profile-contact-chip__body">
+                      <span class="profile-contact-chip__value">@ann_rivera_pro</span>
+                      <span class="profile-contact-chip__label">Telegram</span>
+                    </span>
+                  </a>
+                  <a href="mailto:ann.riv@axfiles.com" class="profile-contact-chip">
+                    <span class="profile-contact-chip__body">
+                      <span class="profile-contact-chip__value">ann.riv@axfiles.com</span>
+                      <span class="profile-contact-chip__label">Рабочая почта</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+          </article>
+          </div>
+        </section>
+
+        <section class="profile-pubs" aria-labelledby="pubs-heading">
+          <div class="profile-pubs-head">
+            <h2 id="pubs-heading" class="section-label">Публикации</h2>
+            <button type="button" class="profile-action-btn profile-pubs-create">Создать</button>
+          </div>
+          <div class="cols-toolbar">
+            <nav class="nav-pills" role="tablist" aria-label="Статус публикаций">
+              <button type="button" class="is-active" role="tab" aria-selected="true" id="pub-tab-published" aria-controls="pub-list-published">Опубликовано (14)</button>
+              <button type="button" role="tab" aria-selected="false" id="pub-tab-drafts" aria-controls="pub-list-drafts">Черновики (3)</button>
+            </nav>
+          </div>
+          <div class="quick-access__cards-wrap">
+            <div class="profile-pub-stack" id="pub-list-published" role="tabpanel" aria-labelledby="pub-tab-published">
+              <a href="#" class="feed-card quick-access-card">
+                <div class="quick-access-card__body">
+                  <div class="quick-access-card__icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+                    </svg>
+                  </div>
+                  <div class="quick-access-card__text">
+                    <div class="quick-access-card__name-row">
+                      <div class="quick-access-card__lead">
+                        <p class="quick-access-card__title">Инсайты по проектам за Q3</p>
+                        <p class="quick-access-card__meta">Обновлено: 2 часа назад</p>
+                      </div>
+                      <span class="quick-access-card__chevron" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="feed-card quick-access-card">
+                <div class="quick-access-card__body">
+                  <div class="quick-access-card__icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+                    </svg>
+                  </div>
+                  <div class="quick-access-card__text">
+                    <div class="quick-access-card__name-row">
+                      <div class="quick-access-card__lead">
+                        <p class="quick-access-card__title">Шаблон BPMN для согласования процессов</p>
+                        <p class="quick-access-card__meta">Обновлено: вчера в 18:42</p>
+                      </div>
+                      <span class="quick-access-card__chevron" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="feed-card quick-access-card">
+                <div class="quick-access-card__body">
+                  <div class="quick-access-card__icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <path d="M14 2v6h6M10 12h4M10 16h7" />
+                    </svg>
+                  </div>
+                  <div class="quick-access-card__text">
+                    <div class="quick-access-card__name-row">
+                      <div class="quick-access-card__lead">
+                        <p class="quick-access-card__title">Чек-лист подготовки материалов к совету</p>
+                        <p class="quick-access-card__meta">Обновлено: 3 мая в 11:20</p>
+                      </div>
+                      <span class="quick-access-card__chevron" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="feed-card quick-access-card">
+                <div class="quick-access-card__body">
+                  <div class="quick-access-card__icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <path d="M14 2v6h6" />
+                    </svg>
+                  </div>
+                  <div class="quick-access-card__text">
+                    <div class="quick-access-card__name-row">
+                      <div class="quick-access-card__lead">
+                        <p class="quick-access-card__title">SQL-запросы для отчётности по тегам ax.files</p>
+                        <p class="quick-access-card__meta">Обновлено: 28 апреля в 09:05</p>
+                      </div>
+                      <span class="quick-access-card__chevron" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="profile-pub-stack" id="pub-list-drafts" role="tabpanel" aria-labelledby="pub-tab-drafts" hidden>
+              <a href="#" class="feed-card quick-access-card">
+                <div class="quick-access-card__body">
+                  <div class="quick-access-card__icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                  </div>
+                  <div class="quick-access-card__text">
+                    <div class="quick-access-card__name-row">
+                      <div class="quick-access-card__lead">
+                        <p class="quick-access-card__title">Обзор метрик внедрения за апрель</p>
+                        <p class="quick-access-card__meta">Черновик · сегодня в 08:14</p>
+                      </div>
+                      <span class="quick-access-card__chevron" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="feed-card quick-access-card">
+                <div class="quick-access-card__body">
+                  <div class="quick-access-card__icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+                    </svg>
+                  </div>
+                  <div class="quick-access-card__text">
+                    <div class="quick-access-card__name-row">
+                      <div class="quick-access-card__lead">
+                        <p class="quick-access-card__title">Карта стейкхолдеров — проект «Север»</p>
+                        <p class="quick-access-card__meta">Черновик · 30 апреля в 16:55</p>
+                      </div>
+                      <span class="quick-access-card__chevron" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="feed-card quick-access-card">
+                <div class="quick-access-card__body">
+                  <div class="quick-access-card__icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <path d="M14 2v6h6" />
+                    </svg>
+                  </div>
+                  <div class="quick-access-card__text">
+                    <div class="quick-access-card__name-row">
+                      <div class="quick-access-card__lead">
+                        <p class="quick-access-card__title">FAQ по онбордингу в базу знаний</p>
+                        <p class="quick-access-card__meta">Черновик · 25 апреля в 12:30</p>
+                      </div>
+                      <span class="quick-access-card__chevron" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="profile-skills-wrap" aria-label="Навыки">
+          <div class="profile-skills-head">
+            <h2 class="section-label">Навыки</h2>
+          </div>
+          <div class="profile-skills" role="list" aria-label="Навыки и компетенции">
+            <span role="listitem">Бизнес-анализ</span>
+            <span role="listitem">BPMN</span>
+            <span role="listitem">Системный анализ</span>
+            <span role="listitem">SQL</span>
+            <span role="listitem">Excel</span>
+          </div>
+        </section>
+
+          <div class="profile-thanks-row" aria-label="Благодарности">
+            <div class="profile-panel-head profile-thanks-panel__head">
+              <h2 class="section-label profile-panel-head__title">
+                Спасибо
+                <span class="profile-panel-head__count">456</span>
+                <span class="section-label__chevron" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </span>
+              </h2>
+            </div>
+            <article class="profile-thanks-panel">
+              <div class="profile-thanks-panel__list">
+                <div class="profile-thanks-person">
+                  <img
+                    class="profile-thanks-person__avatar"
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop"
+                    alt=""
+                    width="64"
+                    height="64"
+                    decoding="async"
+                  />
+                  <div class="profile-thanks-person__info">
+                    <p class="profile-thanks-person__name">Светлана Иващенко</p>
+                    <span class="profile-thanks-person__heart" aria-hidden="true">❤️</span>
+                  </div>
+                </div>
+                <div class="profile-thanks-person">
+                  <img
+                    class="profile-thanks-person__avatar"
+                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=128&h=128&fit=crop"
+                    alt=""
+                    width="64"
+                    height="64"
+                    decoding="async"
+                  />
+                  <div class="profile-thanks-person__info">
+                    <p class="profile-thanks-person__name">Александра Бермудова</p>
+                    <span class="profile-thanks-person__heart" aria-hidden="true">❤️</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        <section class="profile-extras" aria-label="Достижения">
+          <div class="profile-panel-head">
+            <h2 class="section-label profile-panel-head__title">
+              Достижения
+              <span class="profile-panel-head__count">2</span>
+              <span class="section-label__chevron" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </span>
+            </h2>
+          </div>
+          <article class="profile-achievements-panel">
+            <div class="profile-achievements-panel__grid">
+              <div class="profile-achievement-tile" title="Награда сообщества">
+                <div class="profile-achievement-tile__icon" aria-hidden="true">
+                  <img src="assets/badge-mentor.png" alt="" width="96" height="96" decoding="async" />
+                </div>
+                <p class="profile-achievement-tile__label">Ментор</p>
+              </div>
+              <div class="profile-achievement-tile" title="10+ публикаций в квартал">
+                <div class="profile-achievement-tile__icon" aria-hidden="true">
+                  <img src="assets/badge-writer.png" alt="" width="96" height="96" decoding="async" />
+                </div>
+                <p class="profile-achievement-tile__label">Активный писатель</p>
+              </div>
+            </div>
+          </article>
+        </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="app-tabbar" role="navigation" aria-label="Нижняя панель">
+    <div class="app-tabbar__track">
+      <nav class="nav-pills app-tabbar__nav" aria-label="Основное меню">
+        <button type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1v-9.5z" />
+          </svg>
+          <span class="nav-pills__label">Главная</span>
+        </button>
+        <a href="knowledge.html" class="nav-pills__link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5z" />
+            <path d="M8 2v4M12 2v4M16 2v4" />
+          </svg>
+          <span class="nav-pills__label">База знаний</span>
+        </a>
+        <button type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span class="nav-pills__label">Эксперты</span>
+        </button>
+      </nav>
+      <div class="app-tabbar__search-slot">
+        <label class="search app-tabbar__search" aria-label="Поиск">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
+          <input type="search" placeholder="Искать информацию" autocomplete="off" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll(".profile-pubs .cols-toolbar .nav-pills button");
+      var panels = [
+        document.getElementById("pub-list-published"),
+        document.getElementById("pub-list-drafts")
+      ];
+      if (!tabs.length || panels.some(function (p) { return !p; })) return;
+      tabs.forEach(function (btn, i) {
+        btn.addEventListener("click", function () {
+          tabs.forEach(function (b, j) {
+            var on = j === i;
+            b.classList.toggle("is-active", on);
+            b.setAttribute("aria-selected", on ? "true" : "false");
+          });
+          panels.forEach(function (p, j) {
+            if (j === i) p.removeAttribute("hidden");
+            else p.setAttribute("hidden", "");
+          });
+        });
+      });
+    })();
+  </script>
+  <script>
+    (function syncSearchCompact() {
+      var label = document.querySelector(".topbar .search");
+      var cluster = document.querySelector(".topbar-cluster");
+      if (!label || !cluster) return;
+      var input = label.querySelector("input");
+      if (!input) return;
+
+      function measurePlaceholderWidth() {
+        var ph = input.getAttribute("placeholder") || "";
+        if (!ph) return 0;
+        var probe = document.createElement("span");
+        probe.textContent = ph;
+        var cs = window.getComputedStyle(input);
+        probe.style.cssText =
+          "position:absolute;left:-9999px;top:0;visibility:hidden;white-space:nowrap;font-size:" +
+          cs.fontSize +
+          ";font-family:" +
+          cs.fontFamily +
+          ";font-weight:" +
+          cs.fontWeight +
+          ";letter-spacing:" +
+          cs.letterSpacing;
+        document.body.appendChild(probe);
+        var w = probe.getBoundingClientRect().width;
+        probe.remove();
+        return w;
+      }
+
+      function tick() {
+        if (window.matchMedia("(max-width: 820px)").matches) {
+          label.classList.remove("search--compact");
+          return;
+        }
+        var nav = cluster.querySelector(".nav-pills");
+        var navW = nav ? nav.getBoundingClientRect().width : 0;
+        var cw = cluster.getBoundingClientRect().width;
+        var cs = window.getComputedStyle(cluster);
+        var gap = parseFloat(cs.columnGap || cs.gap);
+        if (Number.isNaN(gap)) gap = 16;
+        var spare = cw - navW - gap * 2;
+        var chrome = 52;
+        var need = measurePlaceholderWidth() + chrome;
+        label.classList.toggle("search--compact", spare < need + 10);
+      }
+
+      var navEl = cluster.querySelector(".nav-pills");
+      var ro = new ResizeObserver(tick);
+      ro.observe(cluster);
+      if (navEl) ro.observe(navEl);
+      window.addEventListener("resize", tick);
+      window.addEventListener("load", tick);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(tick);
+      tick();
+    })();
+  </script>
+  <script>
+    (function profileNav() {
+      var topNav = document.querySelector(".topbar-cluster > .nav-pills");
+      var bottomNav = document.querySelector(".app-tabbar .app-tabbar__nav");
+      if (!topNav || !bottomNav) return;
+      var topBtns = topNav.querySelectorAll("button");
+      var botBtns = bottomNav.querySelectorAll("button");
+      topBtns.forEach(function (b) {
+        b.classList.remove("is-active");
+        b.removeAttribute("aria-current");
+      });
+      botBtns.forEach(function (b) {
+        b.classList.remove("is-active");
+        b.removeAttribute("aria-current");
+      });
+      function goHome() {
+        window.location.href = "index.html";
+      }
+      topBtns.forEach(function (btn, i) {
+        btn.addEventListener("click", function () {
+          if (i === 0) goHome();
+        });
+      });
+      botBtns.forEach(function (btn, i) {
+        btn.addEventListener("click", function () {
+          if (i === 0) goHome();
+        });
+      });
+    })();
+
+    (function syncDualSearchInputs() {
+      var topIn = document.querySelector(".topbar-cluster > .search input");
+      var botIn = document.querySelector(".app-tabbar__search input");
+      if (!topIn || !botIn) return;
+      function mirror(from, to) {
+        from.addEventListener("input", function () {
+          if (to.value !== from.value) to.value = from.value;
+        });
+      }
+      mirror(topIn, botIn);
+      mirror(botIn, topIn);
+    })();
+  </script>
+  <script src="assets/global-search.js"></script>
+</body>
+</html>

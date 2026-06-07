@@ -1,0 +1,29 @@
+# Secrets & local runtime
+.env
+.env.local
+.public-url
+.run/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+data/vectorizer.joblib
+
+# Node (local only)
+node_modules/
+package-lock.json
+
+# OS & IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Dev artifacts
+.stitch-export/
+package/
+figma/
+h2d-*.json
+*.tgz
+profile-*-figma.html
+ngrok.yml

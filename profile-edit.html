@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ax.files — Редактировать профиль</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/app.css" />
+  <link rel="stylesheet" href="assets/profile.css" />
+  <link rel="stylesheet" href="assets/profile-edit.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar-curtain">
+      <div class="topbar">
+        <a href="index.html" class="logo" aria-label="ax.files — на главную"><img class="logo-img" src="assets/logo-ax.png" alt="" width="83" height="19" decoding="async" /></a>
+        <div class="topbar-mid">
+          <div class="topbar-cluster">
+            <label class="search" aria-label="Поиск">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3" />
+              </svg>
+              <input type="search" placeholder="Искать информацию" />
+            </label>
+            <nav class="nav-pills" aria-label="Основное меню">
+              <button type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1v-9.5z" />
+                </svg>
+                <span class="nav-pills__label">Главная</span>
+              </button>
+              <button type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5z" />
+                  <path d="M8 2v4M12 2v4M16 2v4" />
+                </svg>
+                <span class="nav-pills__label">База знаний</span>
+              </button>
+              <button type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span class="nav-pills__label">Эксперты</span>
+              </button>
+            </nav>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button type="button" class="icon-btn" aria-label="Уведомления">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+          </button>
+          <a href="profile.html" aria-label="Профиль" aria-current="page"><img class="avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&h=96&fit=crop" alt="" width="40" height="40" decoding="async" /></a>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell-sheet">
+      <main class="shell-sheet__main profile-page profile-edit-page">
+        <div class="profile-edit-layout">
+          <a href="profile.html" class="profile-edit__back">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+            Профиль
+          </a>
+          <div class="profile-edit">
+            <h1 class="profile-edit__title">Редактировать профиль</h1>
+
+          <form class="profile-edit-form" action="profile.html" method="get" id="profile-edit-form">
+            <section class="profile-edit-section" aria-labelledby="edit-photo-heading">
+              <h2 id="edit-photo-heading" class="profile-edit-section__title">Фото</h2>
+              <div class="profile-edit-avatar">
+                <div class="profile-edit-avatar__wrap">
+                  <img
+                    class="profile-edit-avatar__img"
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=256&h=256&fit=crop"
+                    alt=""
+                    width="152"
+                    height="152"
+                    decoding="async"
+                  />
+                </div>
+                <button type="button" class="profile-edit-avatar__btn">Загрузить фото</button>
+              </div>
+            </section>
+
+            <section class="profile-edit-section" aria-labelledby="edit-main-heading">
+              <h2 id="edit-main-heading" class="profile-edit-section__title">Основная информация</h2>
+              <div class="profile-edit-fields">
+                <div class="profile-edit-field">
+                  <label class="profile-edit-field__label" for="edit-name">ФИО</label>
+                  <input class="profile-edit-field__input" type="text" id="edit-name" name="name" value="Васильева Анна Сергеевна" autocomplete="name" disabled />
+                </div>
+                <div class="profile-edit-field">
+                  <label class="profile-edit-field__label" for="edit-role">Должность</label>
+                  <input class="profile-edit-field__input" type="text" id="edit-role" name="role" value="Младший аналитик" disabled />
+                </div>
+                <div class="profile-edit-field">
+                  <label class="profile-edit-field__label" for="edit-dept">Департамент</label>
+                  <input class="profile-edit-field__input" type="text" id="edit-dept" name="dept" value="Департамент Бизнес-анализа" disabled />
+                </div>
+              </div>
+              <p class="profile-edit-section__hint">Для изменений обратитесь в HR-отдел</p>
+            </section>
+
+            <section class="profile-edit-section" aria-labelledby="edit-contacts-heading">
+              <h2 id="edit-contacts-heading" class="profile-edit-section__title">Контакты</h2>
+              <div class="profile-edit-fields">
+                <div class="profile-edit-field">
+                  <label class="profile-edit-field__label" for="edit-telegram">Telegram</label>
+                  <div class="profile-edit-field__prefix-wrap">
+                    <span class="profile-edit-field__prefix" aria-hidden="true">@</span>
+                    <input class="profile-edit-field__input profile-edit-field__input--prefixed" type="text" id="edit-telegram" name="telegram" value="ann_rivera_pro" autocomplete="username" spellcheck="false" />
+                  </div>
+                </div>
+                <div class="profile-edit-field">
+                  <label class="profile-edit-field__label" for="edit-email">Рабочая почта</label>
+                  <input class="profile-edit-field__input" type="email" id="edit-email" name="email" value="ann.riv@axfiles.com" autocomplete="email" disabled />
+                </div>
+              </div>
+              <p class="profile-edit-section__hint">Для изменений обратитесь в HR-отдел</p>
+            </section>
+
+            <section class="profile-edit-section" aria-labelledby="edit-skills-heading">
+              <h2 id="edit-skills-heading" class="profile-edit-section__title">Навыки</h2>
+              <div class="profile-edit-skills" id="edit-skills-list" role="list">
+                <span class="profile-edit-skill" role="listitem">
+                  Бизнес-анализ
+                  <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык Бизнес-анализ">×</button>
+                </span>
+                <span class="profile-edit-skill" role="listitem">
+                  BPMN
+                  <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык BPMN">×</button>
+                </span>
+                <span class="profile-edit-skill" role="listitem">
+                  Системный анализ
+                  <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык Системный анализ">×</button>
+                </span>
+                <span class="profile-edit-skill" role="listitem">
+                  SQL
+                  <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык SQL">×</button>
+                </span>
+                <span class="profile-edit-skill" role="listitem">
+                  Excel
+                  <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык Excel">×</button>
+                </span>
+              </div>
+              <div class="profile-edit-skill-add">
+                <input class="profile-edit-field__input" type="text" id="edit-skill-input" placeholder="Добавить навык" />
+                <button type="button" class="profile-edit-skill-add__btn" id="edit-skill-add">Добавить</button>
+              </div>
+            </section>
+
+            <div class="profile-edit-actions">
+              <button type="submit" class="profile-action-btn">Сохранить</button>
+              <a href="profile.html" class="profile-edit-actions__cancel">Отмена</a>
+            </div>
+          </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="app-tabbar" role="navigation" aria-label="Нижняя панель">
+    <div class="app-tabbar__track">
+      <nav class="nav-pills app-tabbar__nav" aria-label="Основное меню">
+        <button type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1v-9.5z" />
+          </svg>
+          <span class="nav-pills__label">Главная</span>
+        </button>
+        <button type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5z" />
+            <path d="M8 2v4M12 2v4M16 2v4" />
+          </svg>
+          <span class="nav-pills__label">База знаний</span>
+        </button>
+        <button type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span class="nav-pills__label">Эксперты</span>
+        </button>
+      </nav>
+      <div class="app-tabbar__search-slot">
+        <label class="search app-tabbar__search" aria-label="Поиск">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
+          <input type="search" placeholder="Искать информацию" autocomplete="off" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function profileEditTelegram() {
+      var input = document.getElementById("edit-telegram");
+      if (!input) return;
+
+      function stripAt(value) {
+        return value.replace(/^@+/, "");
+      }
+
+      input.addEventListener("input", function () {
+        var clean = stripAt(input.value);
+        if (input.value !== clean) input.value = clean;
+      });
+
+      input.addEventListener("blur", function () {
+        input.value = stripAt(input.value);
+      });
+    })();
+  </script>
+  <script>
+    (function profileEditSkills() {
+      var list = document.getElementById("edit-skills-list");
+      var input = document.getElementById("edit-skill-input");
+      var addBtn = document.getElementById("edit-skill-add");
+      if (!list || !input || !addBtn) return;
+
+      function bindRemove(chip) {
+        var btn = chip.querySelector(".profile-edit-skill__remove");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          chip.remove();
+        });
+      }
+
+      list.querySelectorAll(".profile-edit-skill").forEach(bindRemove);
+
+      function addSkill() {
+        var text = input.value.trim();
+        if (!text) return;
+        var chip = document.createElement("span");
+        chip.className = "profile-edit-skill";
+        chip.setAttribute("role", "listitem");
+        chip.innerHTML =
+          text +
+          ' <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык ' +
+          text +
+          '">×</button>';
+        list.appendChild(chip);
+        bindRemove(chip);
+        input.value = "";
+        input.focus();
+      }
+
+      addBtn.addEventListener("click", addSkill);
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          addSkill();
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function syncSearchCompact() {
+      var label = document.querySelector(".topbar .search");
+      var cluster = document.querySelector(".topbar-cluster");
+      if (!label || !cluster) return;
+      var input = label.querySelector("input");
+      if (!input) return;
+
+      function measurePlaceholderWidth() {
+        var ph = input.getAttribute("placeholder") || "";
+        if (!ph) return 0;
+        var probe = document.createElement("span");
+        probe.textContent = ph;
+        var cs = window.getComputedStyle(input);
+        probe.style.cssText =
+          "position:absolute;left:-9999px;top:0;visibility:hidden;white-space:nowrap;font-size:" +
+          cs.fontSize +
+          ";font-family:" +
+          cs.fontFamily +
+          ";font-weight:" +
+          cs.fontWeight +
+          ";letter-spacing:" +
+          cs.letterSpacing;
+        document.body.appendChild(probe);
+        var w = probe.getBoundingClientRect().width;
+        probe.remove();
+        return w;
+      }
+
+      function tick() {
+        if (window.matchMedia("(max-width: 820px)").matches) {
+          label.classList.remove("search--compact");
+          return;
+        }
+        var nav = cluster.querySelector(".nav-pills");
+        var navW = nav ? nav.getBoundingClientRect().width : 0;
+        var cw = cluster.getBoundingClientRect().width;
+        var cs = window.getComputedStyle(cluster);
+        var gap = parseFloat(cs.columnGap || cs.gap);
+        if (Number.isNaN(gap)) gap = 16;
+        var spare = cw - navW - gap * 2;
+        var chrome = 52;
+        var need = measurePlaceholderWidth() + chrome;
+        label.classList.toggle("search--compact", spare < need + 10);
+      }
+
+      var navEl = cluster.querySelector(".nav-pills");
+      var ro = new ResizeObserver(tick);
+      ro.observe(cluster);
+      if (navEl) ro.observe(navEl);
+      window.addEventListener("resize", tick);
+      window.addEventListener("load", tick);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(tick);
+      tick();
+    })();
+  </script>
+  <script>
+    (function profileNav() {
+      var topNav = document.querySelector(".topbar-cluster > .nav-pills");
+      var bottomNav = document.querySelector(".app-tabbar .app-tabbar__nav");
+      if (!topNav || !bottomNav) return;
+      var topBtns = topNav.querySelectorAll("button");
+      var botBtns = bottomNav.querySelectorAll("button");
+
+      function goHome() {
+        window.location.href = "index.html";
+      }
+      function goProfile() {
+        window.location.href = "profile.html";
+      }
+
+      topBtns.forEach(function (btn, i) {
+        btn.addEventListener("click", function () {
+          if (i === 0) goHome();
+        });
+      });
+      botBtns.forEach(function (btn, i) {
+        btn.addEventListener("click", function () {
+          if (i === 0) goHome();
+        });
+      });
+    })();
+
+    (function syncDualSearchInputs() {
+      var topIn = document.querySelector(".topbar-cluster > .search input");
+      var botIn = document.querySelector(".app-tabbar__search input");
+      if (!topIn || !botIn) return;
+      function mirror(from, to) {
+        from.addEventListener("input", function () {
+          if (to.value !== from.value) to.value = from.value;
+        });
+      }
+      mirror(topIn, botIn);
+      mirror(botIn, topIn);
+    })();
+  </script>
+</body>
+</html>

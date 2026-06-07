@@ -1,0 +1,12 @@
+{
+  "name": "ax-files-kb",
+  "private": true,
+  "scripts": {
+    "dev": "python3 -m http.server 3000 --bind 127.0.0.1",
+    "api": "python3 -m uvicorn api.main:app --reload --host 127.0.0.1 --port 8000",
+    "generate": "python3 scripts/generate_synthetic.py",
+    "index": "python3 scripts/index_corpus.py --rebuild",
+    "index:local": "python3 scripts/index_corpus_local.py",
+    "seed": "npm run generate && (test -f .env && npm run index || npm run index:local)"
+  }
+}
