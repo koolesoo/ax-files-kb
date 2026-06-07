@@ -11,8 +11,6 @@ import numpy as np
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
 from openai import OpenAI
 from pydantic import BaseModel, Field
 
@@ -986,22 +984,3 @@ def ask(body: AskRequest) -> AskResponse:
     return AskResponse(answer=answer, summary=summary, detail=detail, sources=sources, confidence=confidence)
 
 
-_STATIC_PAGES = ("index.html", "knowledge.html", "profile.html", "profile-edit.html")
-
-
-@app.get("/")
-def serve_index() -> FileResponse:
-    return FileResponse(ROOT / "index.html")
-
-
-@app.get("/{page}")
-def serve_page(page: str) -> FileResponse:
-    if page not in _STATIC_PAGES:
-        raise HTTPException(404, "Not found")
-    path = ROOT / page
-    if not path.is_file():
-        raise HTTPException(404, "Not found")
-    return FileResponse(path)
-
-
-app.mount("/assets", StaticFiles(directory=ROOT / "assets"), name="assets")

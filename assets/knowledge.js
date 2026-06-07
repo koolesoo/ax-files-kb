@@ -531,7 +531,7 @@
         var hint =
           location.hostname === "127.0.0.1" || location.hostname === "localhost"
             ? "Запустите: npm run api"
-            : "Проверьте API на Render и переменную API_PROXY_URL в Netlify";
+            : "Проверьте OPENAI_API_KEY в Netlify и пересоберите сайт";
         catalogEl.innerHTML = '<p class="kb-error">Не удалось загрузить каталог. ' + hint + "</p>";
       }
     }
