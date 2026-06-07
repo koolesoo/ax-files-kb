@@ -99,7 +99,7 @@ function gatherAskContext(question, qvec, corpus) {
 
   for (const [it, sc] of searchItems(corpus, qvec, "mention", 6)) {
     if (personSearch && !matchedIds.has(it.expert_id)) continue;
-    const boosted = keywordBoostScore(question, sc, it.document_title || "", it.text);
+    let boosted = keywordBoostScore(question, sc, it.document_title || "", it.text);
     if (snippetIsGeneric(it.text) && !textHitsQuery(question, it.document_title || "")) boosted *= 0.45;
     pool.push([it, boosted, "mention", textHitsQuery(question, it.document_title || "") ? 2 : 1]);
   }
