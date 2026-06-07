@@ -9,9 +9,9 @@
 
 | Переменная | Значение |
 |------------|----------|
-| `OPENAI_API_KEY` | ваш ключ OpenAI |
+| `OPENAI_API_KEY` | ваш ключ OpenAI (единственная обязательная) |
 
-Опционально: `OPENAI_MODEL`, `OPENAI_EMBEDDING_MODEL`, `RAG_SCORE_THRESHOLD`, `RAG_ASK_MIN_SCORE`
+Остальные переменные (`OPENAI_MODEL` и т.д.) — только если нужно переопределить дефолты. **Не помечайте их как secret** в Netlify — иначе сработает ложное срабатывание сканера.
 
 3. Deploy → откройте `https://ваш-сайт.netlify.app/knowledge.html`
 

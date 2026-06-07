@@ -1,6 +1,10 @@
 [build]
   publish = "."
 
+[build.environment]
+  # Это не секреты — только конфиг. Сканер иначе ловит совпадения в коде/CSS.
+  SECRETS_SCAN_OMIT_KEYS = "OPENAI_MODEL,OPENAI_EMBEDDING_MODEL,RAG_SCORE_THRESHOLD,RAG_ASK_MIN_SCORE"
+
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
