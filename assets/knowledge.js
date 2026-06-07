@@ -1,8 +1,9 @@
 (function () {
   var API =
-    location.hostname === "127.0.0.1" || location.hostname === "localhost"
+    (typeof window.__API_BASE__ === "string" && window.__API_BASE__) ||
+    (location.hostname === "127.0.0.1" || location.hostname === "localhost"
       ? "http://127.0.0.1:8000"
-      : location.protocol + "//" + location.host;
+      : location.protocol + "//" + location.host);
   var PAGE_SIZE = 5;
 
   var heroInput = document.getElementById("kb-search-input");

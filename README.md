@@ -1,42 +1,50 @@
 # ax.files — база знаний (демо)
 
-Каталог, семантический поиск и ответы на вопросы (RAG).
+## Быстрый деплой (рекомендуется): только Render
 
-## Деплой: Netlify (фронт) + Render (API)
+Один URL для всего — фронт + API.
 
-Netlify **не запускает Python** — API живёт на Render, Netlify проксирует `/api/*`.
+1. [dashboard.render.com](https://dashboard.render.com) → **New** → **Web Service**
+2. Репозиторий: `koolesoo/ax-files-kb`, ветка `main`
+3. **Name:** `ax-files-kb-api` (или любое)
+4. **Build:** `pip install -r api/requirements.txt`
+5. **Start:** `uvicorn api.main:app --host 0.0.0.0 --port $PORT`
+6. **Environment:** `OPENAI_API_KEY` = ваш ключ
+7. После деплоя откройте: `https://ВАШ-СЕРВИС.onrender.com/knowledge.html`
 
-### 1. API на Render
+Проверка API: `https://ВАШ-СЕРВИС.onrender.com/api/health`
 
-1. [dashboard.render.com](https://dashboard.render.com) → **New** → **Blueprint** (или Web Service из GitHub).
-2. Репозиторий: `koolesoo/ax-files-kb` — подхватится `render.yaml`.
-3. В **Environment** добавьте `OPENAI_API_KEY`.
-4. После деплоя скопируйте URL сервиса, например:  
-   `https://ax-files-kb-api.onrender.com`
-5. Проверка: `https://ax-files-kb-api.onrender.com/api/health`
+---
 
-### 2. Фронт на Netlify
+## Netlify (фронт) + Render (API)
 
-1. Импорт из GitHub → репозиторий `ax-files-kb`.
-2. В **Environment variables** добавьте:
+### Render
+Те же шаги, что выше. Скопируйте URL, например `https://ax-files-kb-api.onrender.com`.
+
+### Netlify
+1. Импорт `koolesoo/ax-files-kb` из GitHub
+2. **Environment variables:**
 
 | Переменная | Значение |
 |------------|----------|
-| `API_PROXY_URL` | `https://ax-files-kb-api.onrender.com` (ваш URL Render **без** слэша в конце) |
+| `API_PROXY_URL` | `https://ax-files-kb-api.onrender.com` (ваш URL Render, без `/` в конце) |
 
-3. **Trigger deploy** (пересобрать сайт).
+3. **Deploy** → Clear cache and deploy
 4. Откройте: `https://ваш-сайт.netlify.app/knowledge.html`
 
-`OPENAI_API_KEY` на Netlify **не нужен** — ключ только на Render.
+`OPENAI_API_KEY` нужен **только на Render**, не на Netlify.
 
-## Локальная разработка
+При сборке Netlify записывает URL API в `assets/config.js` и прокси `/api/*`.
+
+---
+
+## Локально
 
 ```bash
-python3 -m pip install -r api/requirements.txt
+pip install -r api/requirements.txt
 cp .env.example .env
 npm run seed
-npm run api    # :8000
-npm run dev    # :3000
+npm run api && npm run dev
 ```
 
 http://127.0.0.1:3000/knowledge.html

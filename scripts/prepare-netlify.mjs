@@ -14,3 +14,9 @@ if (api) {
 }
 
 fs.writeFileSync("_redirects", lines.join("\n") + (lines.length ? "\n" : ""));
+
+fs.writeFileSync(
+  "assets/config.js",
+  `// Generated at Netlify build\nwindow.__API_BASE__ = ${JSON.stringify(api)};\n`
+);
+console.log("assets/config.js →", api || "(same origin)");
