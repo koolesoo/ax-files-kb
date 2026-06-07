@@ -35,13 +35,18 @@ app = FastAPI(
 )
 
 def _cors_origins() -> list[str]:
-    if os.getenv("NETLIFY") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+    raw = os.getenv("CORS_ORIGINS", "")
+    if raw.strip() == "*":
         return ["*"]
-    raw = os.getenv(
-        "CORS_ORIGINS",
-        "http://127.0.0.1:3000,http://localhost:3000,http://127.0.0.1:3080",
-    )
-    return [o.strip() for o in raw.split(",") if o.strip()]
+    if raw.strip():
+        return [o.strip() for o in raw.split(",") if o.strip()]
+    if os.getenv("NETLIFY") or os.getenv("RENDER") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+        return ["*"]
+    return [
+        "http://127.0.0.1:3000",
+        "http://localhost:3000",
+        "http://127.0.0.1:3080",
+    ]
 
 
 app.add_middleware(

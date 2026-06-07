@@ -27,3 +27,4 @@ h2d-*.json
 *.tgz
 profile-*-figma.html
 ngrok.yml
+_redirects

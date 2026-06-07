@@ -526,7 +526,13 @@
       renderCollections(data.collections);
       renderCatalogPage();
     } catch (e) {
-      if (catalogEl) catalogEl.innerHTML = '<p class="kb-error">Не удалось загрузить каталог. Запустите: npm run api</p>';
+      if (catalogEl) {
+        var hint =
+          location.hostname === "127.0.0.1" || location.hostname === "localhost"
+            ? "Запустите: npm run api"
+            : "Проверьте API на Render и переменную API_PROXY_URL в Netlify";
+        catalogEl.innerHTML = '<p class="kb-error">Не удалось загрузить каталог. ' + hint + "</p>";
+      }
     }
   }
 

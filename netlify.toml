@@ -1,17 +1,6 @@
 [build]
   publish = "."
-  command = "echo 'Static site + serverless API'"
+  command = "node scripts/prepare-netlify.mjs"
 
 [build.environment]
-  PYTHON_VERSION = "3.12"
-  NETLIFY = "true"
-
-[functions]
-  directory = "netlify/functions"
-  included_files = ["data/**", "api/**"]
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api"
-  status = 200
-  force = true
+  NODE_VERSION = "20"
