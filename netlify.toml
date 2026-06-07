@@ -4,3 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Exclude backend-only dirs from secrets scan (vector data, Python API, Render config)
+  SECRETS_SCAN_OMIT_PATHS = "data/,api/,render.yaml,scripts/"
+  # Model names (non-secret) appear in data/index.json and render.yaml — omit from value scan
+  SECRETS_SCAN_OMIT_KEYS = "OPENAI_EMBEDDING_MODEL,OPENAI_MODEL,RAG_SCORE_THRESHOLD"
