@@ -1,21 +1,31 @@
+# Environment secrets
 .env
 .env.*
-!.env.example
+.env.example
 .git/
 .run/
 .public-url
+
+# Backend API (runs on Render.com, not served from Netlify)
+api/
+data/
+render.yaml
+
+# Build/utility scripts (not user-facing content)
+scripts/
+
+# Node / Python artifacts
 node_modules/
-.stitch-export/
 package/
 __pycache__/
 *.pyc
 .venv/
-scripts/share_*.sh
-scripts/share_server.py
-scripts/start_public.sh
-scripts/build-h2d-*.mjs
-scripts/send-h2d.mjs
+
+# Dev / IDE
+.stitch-export/
 profile-*-figma.html
 h2d-profile.json
 ngrok.yml
 DEMO.md
+README.md
+package.json
