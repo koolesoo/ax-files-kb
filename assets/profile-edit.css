@@ -261,7 +261,11 @@
       background: var(--surface);
       font-size: 0.8125rem;
       font-weight: 500;
-      color: var(--text-secondary);
+      line-height: 1.2;
+    }
+
+    .profile-edit-skill__label {
+      color: var(--text);
     }
 
     .profile-edit-skill__remove {
@@ -304,19 +308,22 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      width: 2.5rem;
       min-height: 2.5rem;
-      padding: 0 1.15rem;
+      padding: 0;
       border: none;
       border-radius: var(--radius-pill);
       background: #ff6500;
       color: #fff;
       font: inherit;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      line-height: 1.2;
+      line-height: 1;
       cursor: pointer;
       box-shadow: none;
       transition: background 0.15s ease;
+    }
+
+    .profile-edit-skill-add__btn svg {
+      display: block;
     }
 
     .profile-edit-skill-add__btn:hover {

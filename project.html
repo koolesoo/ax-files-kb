@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ax.files — База знаний</title>
+  <title>ax.files — Проект</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/app.css" />
   <link rel="preload" as="image" href="assets/avatars/anna-vasilyeva.webp" fetchpriority="high" />
   <link rel="stylesheet" href="assets/knowledge.css" />
+  <link rel="stylesheet" href="assets/project.css" />
 </head>
 <body>
   <div class="shell">
@@ -64,94 +65,9 @@
     </header>
 
     <div class="shell-sheet">
-      <main class="shell-sheet__main kb-page">
-        <header class="kb-head">
-          <h1 class="kb-head__title">База знаний</h1>
-          <p class="kb-head__sub" id="kb-head-sub">5000+ документов, проектных материалов и экспертных знаний компании</p>
-        </header>
-
-        <div class="kb-search-row">
-          <div class="kb-search-stack">
-            <label class="kb-search-bar" aria-label="Поиск по базе знаний">
-            <span class="kb-search-bar__plus" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            </span>
-            <input type="search" id="kb-search-input" placeholder="Искать документы, экспертов, темы…" autocomplete="off" />
-            <button type="button" class="kb-smart-toggle" id="kb-ask-toggle" aria-pressed="false" aria-expanded="false" aria-controls="kb-ask-panel">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21 8 14 2 9.4h7.6z"/></svg>
-              Умный поиск
-            </button>
-            <button type="button" class="kb-search-btn" id="kb-search-btn">Найти</button>
-          </label>
-            <div class="kb-ask-panel" id="kb-ask-panel" aria-label="Умный ответ" hidden>
-              <label class="kb-ask-panel__label" for="kb-ask-input">Ваш вопрос</label>
-              <textarea id="kb-ask-input" placeholder="Например: Требования к видеозаписям"></textarea>
-              <div class="kb-ask-panel__row">
-                <button type="button" class="kb-btn" id="kb-ask-submit">Получить ответ</button>
-                <span class="kb-status" id="kb-ask-status"></span>
-              </div>
-              <div class="kb-answer is-empty" id="kb-answer"></div>
-              <div id="kb-ask-sources"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="kb-filters">
-          <div class="kb-filters__row">
-            <span class="kb-filters__label">Тип материалов</span>
-            <div class="kb-chips" id="kb-filter-type" role="listbox" aria-label="Тип материалов"></div>
-            <a href="#" class="kb-filters__advanced" id="kb-advanced-filters">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-              Расширенные фильтры
-            </a>
-          </div>
-          <div class="kb-filters__row">
-            <span class="kb-filters__label">Тематика</span>
-            <div class="kb-chips" id="kb-filter-topic" role="listbox" aria-label="Тематика"></div>
-          </div>
-        </div>
-
-        <ul class="kb-stats" id="kb-stats" aria-label="Показатели базы знаний"></ul>
-
-        <div class="kb-layout">
-          <div class="kb-main">
-            <section class="kb-recent" id="kb-recent-section" aria-label="Последние просмотренные">
-              <div class="kb-recent__head">
-                <h2 class="kb-block-title">Последние просмотренные</h2>
-                <a href="#" class="kb-link">Все просмотренные</a>
-              </div>
-              <div class="kb-recent__track" id="kb-recent"></div>
-            </section>
-
-            <section class="kb-list-section" aria-label="Результаты">
-              <div class="kb-list-section__head" id="kb-list-head">
-                <h2 class="kb-block-title" id="kb-list-title">Все материалы</h2>
-                <span class="kb-list-section__count" id="kb-list-count"></span>
-              </div>
-
-              <div id="kb-results" class="kb-results" aria-live="polite" hidden></div>
-              <div id="kb-catalog" class="kb-catalog">
-                <p class="kb-status">Загрузка каталога…</p>
-              </div>
-              <nav class="kb-pagination" id="kb-pagination" aria-label="Страницы" hidden></nav>
-            </section>
-
-          </div>
-
-          <aside class="kb-sidebar" aria-label="Дополнительно">
-            <section class="kb-widget" id="kb-sidebar-experts">
-              <h2 class="kb-widget__title">Эксперты по теме</h2>
-              <ul class="kb-expert-list" id="kb-sidebar-experts-list"></ul>
-            </section>
-            <section class="kb-widget">
-              <h2 class="kb-widget__title">Популярные теги</h2>
-              <div class="kb-tag-cloud" id="kb-popular-tags"></div>
-            </section>
-            <section class="kb-widget">
-              <h2 class="kb-widget__title">Коллекции</h2>
-              <ul class="kb-collections" id="kb-collections"></ul>
-            </section>
-          </aside>
+      <main class="shell-sheet__main proj-page" id="proj-page">
+        <div id="proj-root">
+          <p class="kb-status">Загрузка проекта…</p>
         </div>
       </main>
     </div>
@@ -199,6 +115,7 @@
   <script src="assets/profile-menu.js"></script>
   <script src="assets/global-search.js"></script>
   <script src="assets/kb-more-menu.js"></script>
-  <script src="assets/knowledge.js"></script>
+  <script src="assets/proj-access-modal.js"></script>
+  <script src="assets/project.js"></script>
 </body>
 </html>

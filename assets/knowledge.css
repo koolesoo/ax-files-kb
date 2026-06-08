@@ -363,6 +363,12 @@
 .kb-file-icon--xlsx { background: #16a34a; }
 .kb-file-icon--pptx { background: #ea580c; }
 .kb-file-icon--mp4 { background: #7c3aed; }
+.kb-file-icon--folder { background: rgba(249, 115, 22, 0.85); color: #fff; font-size: 0; }
+
+.kb-recent-card {
+  text-decoration: none;
+  color: inherit;
+}
 
 .kb-doc-card__content {
   min-width: 0;
@@ -384,6 +390,20 @@
   line-height: 1.35;
   flex: 1;
   min-width: 0;
+}
+
+.kb-doc-card__link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.kb-doc-card__link:hover {
+  color: var(--accent);
+}
+
+.kb-doc-card__content {
+  cursor: pointer;
 }
 
 .kb-status-tag {
@@ -488,6 +508,68 @@
 .kb-icon-btn:hover {
   background: rgba(15, 23, 42, 0.05);
   color: var(--text-secondary);
+}
+
+.kb-icon-btn.is-open {
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--text-secondary);
+}
+
+/* ——— Меню «Ещё» ——— */
+.kb-more-menu {
+  position: fixed;
+  z-index: 400;
+  min-width: 220px;
+  padding: 0.4rem 0;
+  background: var(--surface);
+  border-radius: 14px;
+  box-shadow: 0 10px 32px rgba(15, 23, 42, 0.14), 0 2px 8px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.kb-more-menu[hidden] {
+  display: none !important;
+}
+
+.kb-more-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0.6rem 1.05rem;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.kb-more-menu__item:hover {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.kb-more-menu__item svg {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.kb-more-menu__item--danger,
+.kb-more-menu__item--danger svg {
+  color: #ef4444;
+}
+
+.kb-more-menu__item--danger:hover {
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.kb-more-menu__sep {
+  margin: 0.35rem 0;
+  border: none;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 mark.kb-hl {
@@ -627,6 +709,22 @@ mark.kb-hl {
   align-items: center;
   gap: 0.55rem;
   font-size: 0.8rem;
+}
+
+.kb-collection-item__link {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-md);
+  padding: 0.15rem 0;
+  transition: color 0.15s;
+}
+
+.kb-collection-item__link:hover .kb-collection-item__title {
+  color: var(--accent);
 }
 
 .kb-collection-item__icon {

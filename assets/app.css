@@ -587,6 +587,7 @@
 
     .icon-btn {
       box-sizing: border-box;
+      position: relative;
       width: var(--topbar-action-size);
       height: var(--topbar-action-size);
       border-radius: 50%;
@@ -1269,4 +1270,432 @@
       overflow: hidden;
       clip: rect(0, 0, 0, 0);
       border: 0;
+    }
+
+    /* ——— Панель уведомлений ——— */
+    .icon-btn.is-open {
+      background: var(--surface);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    .notif-btn__dot {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      border: 2px solid var(--nav-pills-track);
+    }
+
+    .notif-panel {
+      position: fixed;
+      z-index: 250;
+      width: min(380px, calc(100vw - 16px));
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+    }
+
+    .notif-panel[hidden] {
+      display: none !important;
+    }
+
+    .notif-panel__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 1rem 1.1rem 0.75rem;
+    }
+
+    .notif-panel__heading {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .notif-panel__read-all {
+      border: none;
+      background: none;
+      padding: 0;
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #2563eb;
+      cursor: pointer;
+    }
+
+    .notif-panel__read-all:hover {
+      text-decoration: underline;
+    }
+
+    .notif-panel__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .notif-panel__item {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 0.7rem;
+      padding: 0.85rem 1.1rem;
+      border-top: 1px solid rgba(15, 23, 42, 0.06);
+      position: relative;
+    }
+
+    .notif-panel__item.is-unread::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      bottom: 0.65rem;
+      width: 3px;
+      border-radius: 0 3px 3px 0;
+      background: #2563eb;
+    }
+
+    .notif-panel__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .notif-panel__icon--blue {
+      background: rgba(37, 99, 235, 0.12);
+      color: #2563eb;
+    }
+
+    .notif-panel__icon--red {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+
+    .notif-panel__icon--purple {
+      background: rgba(124, 58, 237, 0.12);
+      color: #7c3aed;
+    }
+
+    .notif-panel__body {
+      min-width: 0;
+    }
+
+    .notif-panel__row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .notif-panel__title {
+      margin: 0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .notif-panel__time {
+      font-size: 0.68rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .notif-panel__text {
+      margin: 0;
+      font-size: 0.76rem;
+      line-height: 1.45;
+      color: var(--text-secondary);
+    }
+
+    .notif-panel__footer {
+      display: block;
+      text-align: center;
+      padding: 0.85rem 1rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #2563eb;
+      text-decoration: none;
+      border-top: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    .notif-panel__footer:hover {
+      background: rgba(37, 99, 235, 0.04);
+    }
+
+    /* ——— Меню профиля ——— */
+    .topbar-avatar-btn {
+      border: none;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    .topbar-avatar-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .topbar-avatar-btn.is-open {
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.35);
+    }
+
+    .profile-menu {
+      position: fixed;
+      z-index: 250;
+      width: min(320px, calc(100vw - 16px));
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+      padding-bottom: 0.35rem;
+    }
+
+    .profile-menu[hidden] {
+      display: none !important;
+    }
+
+    .profile-menu__user {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 0.7rem;
+      align-items: center;
+      padding: 1rem 1rem 0.85rem;
+    }
+
+    .profile-menu__avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .profile-menu__name {
+      margin: 0 0 0.12rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .profile-menu__role {
+      margin: 0;
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      line-height: 1.35;
+    }
+
+    .profile-menu__list {
+      list-style: none;
+      margin: 0;
+      padding: 0.15rem 0;
+      border-top: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    .profile-menu__link {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) 16px;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.65rem 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.12s;
+    }
+
+    .profile-menu__link:hover {
+      background: rgba(15, 23, 42, 0.04);
+    }
+
+    .profile-menu__link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.06);
+      color: var(--text-secondary);
+      display: grid;
+      place-items: center;
+    }
+
+    .profile-menu__link-label {
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .profile-menu__chevron {
+      color: var(--text-tertiary);
+      justify-self: end;
+    }
+
+    .profile-menu__footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.06);
+      margin-top: 0.15rem;
+      padding-top: 0.15rem;
+    }
+
+    .profile-menu__logout {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) 16px;
+      align-items: center;
+      gap: 0.55rem;
+      width: 100%;
+      padding: 0.65rem 1rem 0.75rem;
+      border: none;
+      background: transparent;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+
+    .profile-menu__logout:hover {
+      background: rgba(239, 68, 68, 0.06);
+    }
+
+    .profile-menu__logout-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ef4444;
+      color: #fff;
+      display: grid;
+      place-items: center;
+    }
+
+    .profile-menu__logout-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #ef4444;
+    }
+
+    .profile-menu__logout .profile-menu__chevron {
+      color: #ef4444;
+      opacity: 0.65;
+    }
+
+    /* ——— Подтверждение выхода ——— */
+    .logout-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .logout-modal[hidden] {
+      display: none !important;
+    }
+
+    .logout-modal__backdrop {
+      position: fixed;
+      inset: 0;
+      background: #000;
+    }
+
+    .logout-modal__dialog {
+      position: relative;
+      z-index: 1;
+      width: min(460px, 100%);
+      background: #fff;
+      border-radius: 40px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+      padding: 2.5rem 2.35rem 2rem;
+      text-align: center;
+    }
+
+    .logout-modal__avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.25rem;
+      display: block;
+      box-shadow: 0 0 0 3px #fff, 0 10px 28px rgba(15, 23, 42, 0.12);
+    }
+
+    .logout-modal__title {
+      margin: 0 0 1rem;
+      font-size: clamp(1.45rem, 3.2vw, 1.75rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: #0f172a;
+    }
+
+    .logout-modal__copy {
+      margin: 0 auto 1.85rem;
+      max-width: 22rem;
+    }
+
+    .logout-modal__line {
+      margin: 0;
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: #8e8e93;
+    }
+
+    .logout-modal__line + .logout-modal__user,
+    .logout-modal__user + .logout-modal__line {
+      margin-top: 0.2rem;
+    }
+
+    .logout-modal__user {
+      margin: 0;
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .logout-modal__actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .logout-modal__btn {
+      border: none;
+      border-radius: 999px;
+      min-height: 3rem;
+      padding: 0.85rem 1.15rem;
+      font: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      line-height: 1.2;
+      cursor: pointer;
+      transition: background 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .logout-modal__btn--ghost {
+      background: #f0f0f2;
+      color: #111827;
+    }
+
+    .logout-modal__btn--ghost:hover {
+      background: #e5e5ea;
+    }
+
+    .logout-modal__btn--primary {
+      background: #ef5343;
+      color: #fff;
+      box-shadow: 0 8px 22px rgba(239, 83, 67, 0.32);
+    }
+
+    .logout-modal__btn--primary:hover {
+      background: #e04838;
+      box-shadow: 0 10px 26px rgba(239, 83, 67, 0.38);
     }

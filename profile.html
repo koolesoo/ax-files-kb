@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/app.css" />
+  <link rel="preload" as="image" href="assets/avatars/anna-vasilyeva.webp" fetchpriority="high" />
   <link rel="stylesheet" href="assets/profile.css" />
 
 </head>
@@ -40,23 +41,25 @@
                   </svg>
                   <span class="nav-pills__label">База знаний</span>
                 </a>
-                <button type="button">
+                <a href="experts.html" class="nav-pills__link">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                     <circle cx="12" cy="7" r="4" />
                   </svg>
                   <span class="nav-pills__label">Эксперты</span>
-                </button>
+                </a>
               </nav>
             </div>
           </div>
           <div class="topbar-actions">
-            <button type="button" class="icon-btn" aria-label="Уведомления">
+            <button type="button" class="icon-btn" aria-label="Уведомления" data-notifications-toggle>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" />
               </svg>
             </button>
-            <a href="profile.html" aria-label="Профиль" aria-current="page"><img class="avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&h=96&fit=crop" alt="" width="40" height="40" decoding="async" /></a>
+            <button type="button" class="topbar-avatar-btn is-active" data-profile-menu-toggle aria-label="Профиль" aria-current="page">
+              <img class="avatar" src="assets/avatars/anna-vasilyeva.webp" alt="" width="40" height="40" decoding="async" fetchpriority="high" loading="eager" />
+            </button>
           </div>
       </div>
     </header>
@@ -69,7 +72,7 @@
               <div class="profile-identity-avatar-wrap">
                 <img
                   class="profile-identity-avatar"
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=256&h=256&fit=crop"
+                  src="assets/avatars/anna-vasilyeva.webp"
                   alt=""
                     width="152"
                     height="152"
@@ -429,13 +432,13 @@
           </svg>
           <span class="nav-pills__label">База знаний</span>
         </a>
-        <button type="button">
+        <a href="experts.html" class="nav-pills__link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
             <circle cx="12" cy="7" r="4" />
           </svg>
           <span class="nav-pills__label">Эксперты</span>
-        </button>
+        </a>
       </nav>
       <div class="app-tabbar__search-slot">
         <label class="search app-tabbar__search" aria-label="Поиск">
@@ -573,6 +576,8 @@
       mirror(botIn, topIn);
     })();
   </script>
+  <script src="assets/notifications-panel.js"></script>
+  <script src="assets/profile-menu.js"></script>
   <script src="assets/global-search.js"></script>
 </body>
 </html>

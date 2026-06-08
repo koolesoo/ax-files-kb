@@ -1,6 +1,8 @@
 # ax.files — база знаний (демо)
 
-Каталог, семантический поиск и ответы на вопросы (RAG). **Всё на Netlify.**
+Каталог, проекты, эксперты, карточки документов, семантический поиск и RAG. **Всё на Netlify.**
+
+Страницы: `index.html`, `knowledge.html`, `experts.html`, `document.html`, `project.html`, `profile.html`, `my-publications.html`, `new-material.html`, `profile-settings.html`.
 
 ## Деплой на Netlify
 

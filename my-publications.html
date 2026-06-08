@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ax.files — Мои публикации</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/app.css" />
+  <link rel="preload" as="image" href="assets/avatars/anna-vasilyeva.webp" fetchpriority="high" />
+  <link rel="stylesheet" href="assets/profile.css" />
+  <link rel="stylesheet" href="assets/my-publications.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar-curtain">
+      <div class="topbar">
+        <a href="index.html" class="logo" aria-label="ax.files — на главную"><img class="logo-img" src="assets/logo-ax.png" alt="" width="83" height="19" decoding="async" /></a>
+        <div class="topbar-mid">
+          <div class="topbar-cluster">
+            <label class="search" aria-label="Поиск">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M21 21l-4.3-4.3" />
+              </svg>
+              <input type="search" placeholder="Искать информацию" />
+            </label>
+            <nav class="nav-pills" aria-label="Основное меню">
+              <a href="index.html" class="nav-pills__link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1v-9.5z" />
+                </svg>
+                <span class="nav-pills__label">Главная</span>
+              </a>
+              <a href="knowledge.html" class="nav-pills__link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5z" />
+                  <path d="M8 2v4M12 2v4M16 2v4" />
+                </svg>
+                <span class="nav-pills__label">База знаний</span>
+              </a>
+              <a href="experts.html" class="nav-pills__link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span class="nav-pills__label">Эксперты</span>
+              </a>
+            </nav>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button type="button" class="icon-btn" aria-label="Уведомления" data-notifications-toggle>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+          </button>
+          <button type="button" class="topbar-avatar-btn is-active" data-profile-menu-toggle aria-label="Профиль" aria-current="page">
+            <img class="avatar" src="assets/avatars/anna-vasilyeva.webp" alt="" width="40" height="40" decoding="async" fetchpriority="high" loading="eager" />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell-sheet">
+      <main class="shell-sheet__main profile-page my-pubs-page">
+        <nav class="my-pubs-breadcrumb" aria-label="Навигация">
+          <a href="profile.html">Профиль</a>
+          <span class="my-pubs-breadcrumb__sep" aria-hidden="true">/</span>
+          <span aria-current="page">Мои публикации</span>
+        </nav>
+
+        <header class="my-pubs-head">
+          <div class="my-pubs-head__main">
+            <h1 class="my-pubs-head__title">Мои публикации</h1>
+            <p class="my-pubs-head__sub">Васильева Анна • Младший аналитик • Эксперт</p>
+          </div>
+          <a href="new-material.html" class="profile-action-btn my-pubs-publish">+ Опубликовать материал</a>
+        </header>
+
+        <ul class="my-pubs-stats" aria-label="Статистика публикаций">
+          <li class="my-pubs-stats__item">
+            <span class="my-pubs-stats__value my-pubs-stats__value--accent">14</span>
+            <span class="my-pubs-stats__label">Опубликовано</span>
+          </li>
+          <li class="my-pubs-stats__item">
+            <span class="my-pubs-stats__value">38,2k</span>
+            <span class="my-pubs-stats__label">Просмотров всего</span>
+          </li>
+          <li class="my-pubs-stats__item">
+            <span class="my-pubs-stats__value">456</span>
+            <span class="my-pubs-stats__label">Получено «спасибо»</span>
+          </li>
+          <li class="my-pubs-stats__item">
+            <span class="my-pubs-stats__value">4.8 ★</span>
+            <span class="my-pubs-stats__label">Средняя оценка верификации</span>
+          </li>
+        </ul>
+
+        <div class="cols-toolbar my-pubs-filters">
+          <nav class="nav-pills" role="tablist" aria-label="Фильтр публикаций">
+            <button type="button" class="is-active" role="tab" aria-selected="true" data-pub-filter="all">Все 20</button>
+            <button type="button" role="tab" aria-selected="false" data-pub-filter="published">Опубликовано 14</button>
+            <button type="button" role="tab" aria-selected="false" data-pub-filter="verification">На верификации 2</button>
+            <button type="button" role="tab" aria-selected="false" data-pub-filter="draft">Черновики 3</button>
+            <button type="button" role="tab" aria-selected="false" data-pub-filter="rejected">Отклонено 1</button>
+          </nav>
+        </div>
+
+        <div class="my-pubs-list" id="my-pubs-list">
+          <article class="my-pub-card" data-pub-status="published">
+            <div class="my-pub-card__row">
+              <div class="my-pub-card__icon my-pub-card__icon--pdf" aria-hidden="true">PDF</div>
+              <div class="my-pub-card__body">
+                <div class="my-pub-card__title-row">
+                  <h2 class="my-pub-card__title"><a href="document.html">Инсайты по проектам за Q3</a></h2>
+                  <span class="my-pub-status my-pub-status--published">Опубликовано</span>
+                </div>
+                <p class="my-pub-card__meta">
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    Операц. эффективность
+                  </span>
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    Обновлено: 2 часа назад
+                  </span>
+                </p>
+              </div>
+              <div class="my-pub-card__stats" aria-label="Статистика">
+                <span class="my-pub-card__stats-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  3 240
+                </span>
+                <span class="my-pub-card__stats-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  128
+                </span>
+              </div>
+              <button type="button" class="my-pub-card__menu" aria-label="Действия с публикацией">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <article class="my-pub-card" data-pub-status="verification">
+            <div class="my-pub-card__row">
+              <div class="my-pub-card__icon my-pub-card__icon--docx" aria-hidden="true">DOCX</div>
+              <div class="my-pub-card__body">
+                <div class="my-pub-card__title-row">
+                  <h2 class="my-pub-card__title"><a href="#">Шаблон BPMN для согласования процессов</a></h2>
+                  <span class="my-pub-status my-pub-status--verification">На верификации</span>
+                </div>
+                <p class="my-pub-card__meta">
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    Операционная модель
+                  </span>
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    Отправлено: вчера в 18:42
+                  </span>
+                </p>
+              </div>
+              <button type="button" class="my-pub-card__menu" aria-label="Действия с публикацией">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+              </button>
+            </div>
+            <div class="my-pub-card__panel my-pub-card__panel--verification">
+              <div class="my-pub-card__panel-head">
+                <span>Проверяет Дмитрий Орлов — этап 2 из 3 (проверка источников)</span>
+                <span class="my-pub-card__panel-est">≈ 1 день</span>
+              </div>
+              <div class="my-pub-card__progress" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" aria-label="Прогресс верификации">
+                <span class="my-pub-card__progress-bar" style="width: 66%"></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="my-pub-card" data-pub-status="rejected">
+            <div class="my-pub-card__row">
+              <div class="my-pub-card__icon my-pub-card__icon--pptx" aria-hidden="true">PPTX</div>
+              <div class="my-pub-card__body">
+                <div class="my-pub-card__title-row">
+                  <h2 class="my-pub-card__title"><a href="#">Чек-лист подготовки материалов к совету</a></h2>
+                  <span class="my-pub-status my-pub-status--rejected">Отклонено</span>
+                </div>
+                <p class="my-pub-card__meta">
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    Бизнес
+                  </span>
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    3 мая в 11:20
+                  </span>
+                </p>
+              </div>
+              <button type="button" class="my-pub-card__menu" aria-label="Действия с публикацией">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+              </button>
+            </div>
+            <div class="my-pub-card__panel my-pub-card__panel--rejected">
+              <p class="my-pub-card__panel-text"><strong>Дмитрий Орлов:</strong> «Нужны обновлённые источники для раздела 3 и ссылка на регламент 2025 года.»</p>
+              <a href="#" class="my-pub-card__panel-link">Исправить и отправить снова →</a>
+            </div>
+          </article>
+
+          <article class="my-pub-card" data-pub-status="draft">
+            <div class="my-pub-card__row">
+              <div class="my-pub-card__icon my-pub-card__icon--draft" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </div>
+              <div class="my-pub-card__body">
+                <div class="my-pub-card__title-row">
+                  <h2 class="my-pub-card__title"><a href="#">SQL-запросы для отчётности по тегам ax.files</a></h2>
+                  <span class="my-pub-status my-pub-status--draft">Черновик</span>
+                </div>
+                <p class="my-pub-card__meta">
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    Данные и ИИ
+                  </span>
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    Изменён: 28 апреля в 09:05
+                  </span>
+                  <span class="my-pub-card__meta-item">заполнено 60%</span>
+                </p>
+                <div class="my-pub-card__draft-actions">
+                  <button type="button" class="my-pub-card__continue">Продолжить редактирование</button>
+                </div>
+              </div>
+              <button type="button" class="my-pub-card__menu" aria-label="Действия с публикацией">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <article class="my-pub-card" data-pub-status="published">
+            <div class="my-pub-card__row">
+              <div class="my-pub-card__icon my-pub-card__icon--xlsx" aria-hidden="true">XLSX</div>
+              <div class="my-pub-card__body">
+                <div class="my-pub-card__title-row">
+                  <h2 class="my-pub-card__title"><a href="#">Финансовая модель Q3 2024</a></h2>
+                  <span class="my-pub-status my-pub-status--published">Опубликовано</span>
+                </div>
+                <p class="my-pub-card__meta">
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    Бизнес
+                  </span>
+                  <span class="my-pub-card__meta-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    15 апреля 2023
+                  </span>
+                </p>
+              </div>
+              <div class="my-pub-card__stats" aria-label="Статистика">
+                <span class="my-pub-card__stats-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  1 902
+                </span>
+                <span class="my-pub-card__stats-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  73
+                </span>
+              </div>
+              <button type="button" class="my-pub-card__menu" aria-label="Действия с публикацией">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+              </button>
+            </div>
+          </article>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="app-tabbar" role="navigation" aria-label="Нижняя панель">
+    <div class="app-tabbar__track">
+      <nav class="nav-pills app-tabbar__nav" aria-label="Основное меню">
+        <a href="index.html" class="nav-pills__link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1v-9.5z" />
+          </svg>
+          <span class="nav-pills__label">Главная</span>
+        </a>
+        <a href="knowledge.html" class="nav-pills__link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5z" />
+            <path d="M8 2v4M12 2v4M16 2v4" />
+          </svg>
+          <span class="nav-pills__label">База знаний</span>
+        </a>
+        <a href="experts.html" class="nav-pills__link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span class="nav-pills__label">Эксперты</span>
+        </a>
+      </nav>
+      <div class="app-tabbar__search-slot">
+        <label class="search app-tabbar__search" aria-label="Поиск">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
+          <input type="search" placeholder="Искать информацию" autocomplete="off" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function syncSearchCompact() {
+      var label = document.querySelector(".topbar .search");
+      var cluster = document.querySelector(".topbar-cluster");
+      if (!label || !cluster) return;
+      var input = label.querySelector("input");
+      if (!input) return;
+
+      function measurePlaceholderWidth() {
+        var ph = input.getAttribute("placeholder") || "";
+        if (!ph) return 0;
+        var probe = document.createElement("span");
+        probe.textContent = ph;
+        var cs = window.getComputedStyle(input);
+        probe.style.cssText =
+          "position:absolute;left:-9999px;top:0;visibility:hidden;white-space:nowrap;font-size:" +
+          cs.fontSize +
+          ";font-family:" +
+          cs.fontFamily +
+          ";font-weight:" +
+          cs.fontWeight +
+          ";letter-spacing:" +
+          cs.letterSpacing;
+        document.body.appendChild(probe);
+        var w = probe.getBoundingClientRect().width;
+        probe.remove();
+        return w;
+      }
+
+      function tick() {
+        if (window.matchMedia("(max-width: 820px)").matches) {
+          label.classList.remove("search--compact");
+          return;
+        }
+        var nav = cluster.querySelector(".nav-pills");
+        var navW = nav ? nav.getBoundingClientRect().width : 0;
+        var cw = cluster.getBoundingClientRect().width;
+        var cs = window.getComputedStyle(cluster);
+        var gap = parseFloat(cs.columnGap || cs.gap);
+        if (Number.isNaN(gap)) gap = 16;
+        var spare = cw - navW - gap * 2;
+        var chrome = 52;
+        var need = measurePlaceholderWidth() + chrome;
+        label.classList.toggle("search--compact", spare < need + 10);
+      }
+
+      var navEl = cluster.querySelector(".nav-pills");
+      var ro = new ResizeObserver(tick);
+      ro.observe(cluster);
+      if (navEl) ro.observe(navEl);
+      window.addEventListener("resize", tick);
+      window.addEventListener("load", tick);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(tick);
+      tick();
+    })();
+  </script>
+  <script>
+    (function syncDualSearchInputs() {
+      var topIn = document.querySelector(".topbar-cluster > .search input");
+      var botIn = document.querySelector(".app-tabbar__search input");
+      if (!topIn || !botIn) return;
+      function mirror(from, to) {
+        from.addEventListener("input", function () {
+          if (to.value !== from.value) to.value = from.value;
+        });
+      }
+      mirror(topIn, botIn);
+      mirror(botIn, topIn);
+    })();
+  </script>
+  <script src="assets/notifications-panel.js"></script>
+  <script src="assets/profile-menu.js"></script>
+  <script src="assets/my-publications.js"></script>
+</body>
+</html>

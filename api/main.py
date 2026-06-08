@@ -362,6 +362,7 @@ def health() -> dict:
 
 
 DOC_TYPE_MATERIAL = {
+    "project": "Проект",
     "policy": "Проектные материалы",
     "spec": "Проектные материалы",
     "presentation": "Ассеты",
@@ -372,6 +373,7 @@ DOC_TYPE_MATERIAL = {
 }
 
 DOC_TYPE_EXT = {
+    "project": "folder",
     "policy": "pdf",
     "spec": "docx",
     "presentation": "pptx",
@@ -380,6 +382,69 @@ DOC_TYPE_EXT = {
     "checklist": "xlsx",
     "doc": "pdf",
 }
+
+_PROJECT_FOLDER_NAMES = [
+    ("Аналитика и исследования", "42 файла", False),
+    ("Регламенты и политики", "18 файлов · ограниченный доступ", True),
+    ("Рабочие материалы", "12 файлов", False),
+]
+
+_PROJECT_SUBTITLES = [
+    "Цифровизация проектного документооборота",
+    "Внедрение регламентов и политик",
+    "Кейс клиента и отраслевые материалы",
+    "Операционная эффективность команды",
+]
+
+_ACCESS_ROLES = [
+    ("owner", "Владелец", False),
+    ("editor", "Редактор", False),
+    ("reader", "Читатель", True),
+    ("editor", "Редактор", False),
+]
+
+
+def _section_project_ids() -> dict[str, str]:
+    by_section: dict[str, list[dict]] = {}
+    for doc in corpus.documents:
+        by_section.setdefault(doc.get("section", "Прочее"), []).append(doc)
+    return {sec: sorted(docs, key=lambda d: d["id"])[0]["id"] for sec, docs in by_section.items()}
+
+
+def _is_project_doc(doc: dict, section_projects: dict[str, str] | None = None) -> bool:
+    if doc.get("doc_type") == "project":
+        return True
+    section_projects = section_projects or _section_project_ids()
+    return section_projects.get(doc.get("section")) == doc.get("id")
+
+
+def _format_changed_label(iso: str, seed: int) -> str:
+    if not iso:
+        return "Недавно"
+    months = [
+        "января", "февраля", "марта", "апреля", "мая", "июня",
+        "июля", "августа", "сентября", "октября", "ноября", "декабря",
+    ]
+    parts = iso.split("-")
+    if len(parts) != 3:
+        return iso
+    try:
+        from datetime import date
+        d = date(int(parts[0]), int(parts[1]), int(parts[2]))
+        now = date(2025, 5, 19)
+        diff = (now - d).days
+        if diff <= 0:
+            return f"Сегодня в {10 + seed % 10}:{'45' if seed % 2 else '05'}"
+        if diff == 1:
+            return f"Вчера в {18 + seed % 5}:{'05' if seed % 2 else '30'}"
+        return f"{int(parts[2])} {months[int(parts[1]) - 1]} {parts[0]}"
+    except ValueError:
+        return iso
+
+
+def _project_file_size(seed: int) -> str:
+    sizes = ["88 КБ", "240 КБ", "540 КБ", "2,1 МБ", "4,8 МБ", "8,4 МБ"]
+    return sizes[seed % len(sizes)]
 
 
 def doc_author(doc: dict) -> str:
@@ -392,16 +457,19 @@ def doc_author(doc: dict) -> str:
     return "—"
 
 
-def serialize_document(doc: dict) -> dict:
+def serialize_document(doc: dict, section_projects: dict[str, str] | None = None) -> dict:
     excerpt = doc["body"][:220] + "…" if len(doc["body"]) > 220 else doc["body"]
     dt = doc.get("doc_type", "doc")
+    section_projects = section_projects or _section_project_ids()
+    is_project = _is_project_doc(doc, section_projects)
     return {
         "id": doc["id"],
         "title": doc["title"],
         "section": doc["section"],
-        "doc_type": dt,
-        "material_type": DOC_TYPE_MATERIAL.get(dt, "Проектные материалы"),
-        "file_ext": DOC_TYPE_EXT.get(dt, "pdf"),
+        "doc_type": "project" if is_project else dt,
+        "material_type": "Проект" if is_project else DOC_TYPE_MATERIAL.get(dt, "Проектные материалы"),
+        "file_ext": "folder" if is_project else DOC_TYPE_EXT.get(dt, "pdf"),
+        "is_project": is_project,
         "tags": doc.get("tags", []),
         "updated_at": doc.get("updated_at", ""),
         "author": doc_author(doc),
@@ -413,11 +481,12 @@ def serialize_document(doc: dict) -> dict:
 def list_documents() -> dict:
     from collections import Counter
 
+    section_projects = _section_project_ids()
     sections: dict[str, list] = {}
     flat: list[dict] = []
     tag_counts: Counter[str] = Counter()
     for doc in corpus.documents:
-        item = serialize_document(doc)
+        item = serialize_document(doc, section_projects)
         flat.append(item)
         sections.setdefault(doc["section"], []).append(item)
         for tag in item["tags"]:
@@ -456,15 +525,669 @@ def list_documents() -> dict:
         "popular_tags": [t for t, _ in tag_counts.most_common(14)],
         "experts": expert_rows[:6],
         "collections": [
-            {"id": "c1", "title": "Операционная модель 2025", "count": 24, "icon": "folder"},
-            {"id": "c2", "title": "Кейсы внедрения ax.files", "count": 18, "icon": "doc"},
-            {"id": "c3", "title": "Избранное команды", "count": 12, "icon": "star"},
-            {"id": "c4", "title": "Недавно обновлённые", "count": 9, "icon": "clock"},
+            *[
+                {
+                    "id": p["id"],
+                    "title": p["title"].split(" · ")[0].strip(),
+                    "count": 40 + sum(ord(c) for c in p["id"]) % 220,
+                    "icon": "folder",
+                    "project_id": p["id"],
+                }
+                for p in flat
+                if p.get("is_project")
+            ][:6],
+            {"id": "c-star", "title": "Избранное команды", "count": 12, "icon": "star"},
+            {"id": "c-clock", "title": "Недавно обновлённые", "count": 9, "icon": "clock"},
         ],
         "recent": flat[:5],
         "documents": flat,
         "sections": [{"name": k, "documents": v} for k, v in sections.items()],
     }
+
+
+DOC_TYPE_BADGE = {
+    "policy": "Регламент",
+    "spec": "Спецификация",
+    "presentation": "Презентация",
+    "video": "Видео",
+    "case": "Кейс",
+    "checklist": "Чек-лист",
+    "doc": "Документ",
+}
+
+
+def _doc_initials(name: str) -> str:
+    parts = name.split()
+    return "".join(p[0] for p in parts[:2]).upper()
+
+
+def _document_detail(doc_id: str) -> dict | None:
+    raw = next((d for d in corpus.documents if d["id"] == doc_id), None)
+    if not raw:
+        return None
+    section_projects = _section_project_ids()
+    base = serialize_document(raw, section_projects)
+    seed = sum(ord(c) for c in doc_id)
+    paragraphs = [p for p in raw.get("body", "").split("\n\n") if p]
+    author_expert = next((e for e in corpus.experts if e["name"] == base["author"]), None)
+    section_titles = ["О документе", "Ключевые принципы", "Процедура согласования", "Сроки ответа по запросам"]
+    sections = [
+        {"title": t, "content": paragraphs[i] if i < len(paragraphs) else (paragraphs[-1] if paragraphs else "")}
+        for i, t in enumerate(section_titles)
+    ]
+    sections = [s for s in sections if s["content"]]
+    flat = [serialize_document(d, section_projects) for d in corpus.documents]
+    similar = [
+        {"id": d["id"], "title": d["title"].split(" · ")[0], "file_ext": d["file_ext"], "section": d["section"]}
+        for d in flat
+        if d["id"] != doc_id and (d["section"] == base["section"] or d["doc_type"] == base["doc_type"])
+    ][:3]
+    attach = [
+        ("Шаблон_процесса.xlsx", "xlsx", "420 КБ", "2025-03-18"),
+        ("Презентация_для_команд.pptx", "pptx", "1,8 МБ", "2025-02-04"),
+        ("Чек-лист_внедрения.docx", "docx", "240 КБ", "2025-01-22"),
+    ]
+    published = f"2024-{6 + (seed % 4):02d}-15"
+    focus_topics = [
+        "Отклонения от регламента",
+        "Сроки согласования",
+        "Качество материалов",
+        "Доступы и роли",
+    ]
+    summary_points = [
+        p.strip() for p in (paragraphs[:4] if paragraphs else [base["excerpt"]]) if p.strip()
+    ]
+    if len(summary_points) < 3 and paragraphs:
+        summary_points = [paragraphs[0][:120] + "…"] if paragraphs[0] else summary_points
+    comments = [
+        {
+            "id": "c1",
+            "author": "Ирина Козлова",
+            "initials": "ИК",
+            "role": "Методолог PMO",
+            "text": "Отличный регламент — используем как эталон при онбординге новых кураторов.",
+            "hours_ago": 5,
+            "is_author": False,
+        },
+        {
+            "id": "c2",
+            "author": base["author"],
+            "initials": _doc_initials(base["author"]),
+            "role": author_expert.get("role", "Эксперт") if author_expert else "Эксперт",
+            "text": "Добавил уточнение по срокам согласования в разделе 3. Обратная связь приветствуется.",
+            "hours_ago": 28,
+            "is_author": True,
+        },
+        {
+            "id": "c3",
+            "author": "Мария Некрасова",
+            "initials": "МН",
+            "role": "Аналитик",
+            "text": "Можно ли добавить пример заполнения карточки материала?",
+            "hours_ago": 52,
+            "is_author": False,
+        },
+    ]
+    return {
+        **base,
+        "title_short": base["title"].split(" · ")[0].strip(),
+        "body": raw["body"],
+        "summary": paragraphs[0] if paragraphs else base["excerpt"],
+        "summary_title": "Краткое содержание",
+        "summary_points": summary_points[:4],
+        "sections": sections,
+        "type_label": DOC_TYPE_BADGE.get(raw.get("doc_type", "doc"), "Документ"),
+        "is_verified": True,
+        "is_approved": True,
+        "category": base["section"],
+        "published_at": published,
+        "file_size": f"{1.2 + (seed % 18) / 10:.1f}".replace(".", ",") + " МБ",
+        "views": 180 + (seed % 820),
+        "thanks_count": 8 + (seed % 24),
+        "comments_count": 8,
+        "attachments": [
+            {"id": f"att-{doc_id}-{i}", "name": n, "file_ext": e, "size": s, "date": dt}
+            for i, (n, e, s, dt) in enumerate(attach)
+        ],
+        "versions": [
+            {
+                "version": "3.1",
+                "date": base["updated_at"],
+                "status": "current",
+                "label": "Текущая",
+                "author": base["author"],
+            },
+            {"version": "3.0", "date": "2025-03-12", "status": "archive", "author": base["author"]},
+            {"version": "2.4", "date": "2025-01-28", "status": "archive", "author": base["author"]},
+        ],
+        "comments": comments,
+        "thanks_users": [
+            {"initials": "ДО", "name": "Дмитрий Орлов"},
+            {"initials": "ЕК", "name": "Елена Крылова"},
+            {"initials": "ИС", "name": "Игорь Семёнов"},
+            {"initials": "МП", "name": "Мария Петрова"},
+        ],
+        "parameters": {
+            "type": DOC_TYPE_BADGE.get(raw.get("doc_type", "doc"), base["material_type"]),
+            "format": f"{base['file_ext'].upper()} + {len(attach)} файла",
+            "subject": base["section"],
+            "focus": focus_topics[seed % len(focus_topics)],
+            "status": "Согласовано",
+            "access": "Доступ: все сотрудники",
+            "created": published,
+            "published": published,
+            "updated": base["updated_at"],
+            "views": 180 + (seed % 820),
+        },
+        "similar": [
+            {**s, "updated_at": next((d["updated_at"] for d in flat if d["id"] == s["id"]), "")}
+            for s in similar
+        ],
+        "author_expert": {
+            "id": author_expert["id"] if author_expert else None,
+            "name": base["author"],
+            "role": author_expert.get("role", "Автор материала") if author_expert else "Автор материала",
+            "department": author_expert.get("department", base["section"]) if author_expert else base["section"],
+            "avatar": author_expert.get("avatar", "") if author_expert else "",
+            "initials": _doc_initials(base["author"]),
+            "is_top": seed % 3 != 0,
+            "is_verified": author_expert.get("is_verified", True) if author_expert else False,
+        },
+        "breadcrumbs": [
+            {"label": "Все файлы", "href": "knowledge.html"},
+            {"label": base["section"], "href": f"knowledge.html?q={base['section']}"},
+            {"label": base["title"].split(" · ")[0].strip()},
+        ],
+    }
+
+
+@app.get("/api/documents/{doc_id}")
+def get_document(doc_id: str) -> dict:
+    detail = _document_detail(doc_id)
+    if not detail:
+        raise HTTPException(404, "Документ не найден")
+    return detail
+
+
+def _build_project(project_id: str) -> dict | None:
+    raw = next((d for d in corpus.documents if d["id"] == project_id), None)
+    if not raw:
+        return None
+    section_projects = _section_project_ids()
+    if not _is_project_doc(raw, section_projects):
+        return None
+
+    base = serialize_document(raw, section_projects)
+    seed = sum(ord(c) for c in project_id)
+    title = raw["title"].split(" · ")[0].strip()
+    owner_name = base["author"]
+    owner_expert = next((e for e in corpus.experts if e["name"] == owner_name), None)
+    if not owner_expert and corpus.experts:
+        owner_expert = corpus.experts[seed % len(corpus.experts)]
+
+    section_docs = sorted(
+        [d for d in corpus.documents if d["section"] == raw["section"] and d["id"] != project_id],
+        key=lambda d: d.get("updated_at", ""),
+        reverse=True,
+    )
+
+    items: list[dict] = []
+    for i, (fname, subtext, restricted) in enumerate(_PROJECT_FOLDER_NAMES[:2]):
+        author_exp = corpus.experts[(seed + i) % len(corpus.experts)]
+        count_label = subtext.split(" · ")[0]
+        items.append({
+            "type": "folder",
+            "id": f"fld-{project_id}-{i}",
+            "name": fname,
+            "subtext": count_label if restricted else subtext,
+            "access_restricted": restricted,
+            "access_label": "Доступ по запросу" if restricted else None,
+            "author": {"name": author_exp["name"], "initials": _doc_initials(author_exp["name"]), "avatar": author_exp.get("avatar", "")},
+            "changed": _format_changed_label(section_docs[i]["updated_at"], seed + i) if i < len(section_docs) else _format_changed_label(raw["updated_at"], seed),
+            "size": None,
+        })
+
+    for i, child in enumerate(section_docs[:4]):
+        child_base = serialize_document(child, section_projects)
+        title_lower = child.get("title", "").lower()
+        restricted = i == 3 or any(k in title_lower for k in ("nda", "конфиденци", "строго конфиденци"))
+        ext = child_base["file_ext"]
+        name = f"{child['title'].split(' · ')[0].strip()}.{ext}" if ext != "folder" else child["title"].split(" · ")[0].strip()
+        items.append({
+            "type": "file",
+            "id": f"file-{child['id']}",
+            "name": name,
+            "file_ext": ext,
+            "author": {"name": child_base["author"], "initials": _doc_initials(child_base["author"]), "avatar": ""},
+            "changed": _format_changed_label(child.get("updated_at", ""), seed + i),
+            "size": _project_file_size(seed + i),
+            "doc_id": None if restricted else child["id"],
+            "access_restricted": restricted,
+            "access_label": "Доступ по запросу" if restricted else None,
+        })
+
+    access_users = []
+    for i, (role, role_label, is_you) in enumerate(_ACCESS_ROLES):
+        exp = corpus.experts[(seed + i) % len(corpus.experts)]
+        name = owner_name if role == "owner" else exp["name"]
+        avatar = (owner_expert or {}).get("avatar", "") if role == "owner" else exp.get("avatar", "")
+        access_users.append({
+            "name": name,
+            "initials": _doc_initials(name),
+            "avatar": avatar,
+            "role": role,
+            "role_label": role_label,
+            "is_you": is_you,
+        })
+
+    badges: list[dict] = []
+    body_lower = raw.get("body", "").lower()
+    if "конфиденци" in body_lower or any("конфиденци" in t.lower() for t in raw.get("tags", [])):
+        badges.append({"label": "В конфиденциально", "type": "confidential"})
+    elif seed % 3 != 0:
+        badges.append({"label": "В конфиденциально", "type": "confidential"})
+    if seed % 2 == 0:
+        badges.append({"label": "Категория А", "type": "category"})
+
+    first_file = next((it for it in items if it["type"] == "file"), None)
+    activity = [
+        {"dot": "green", "text": f"{owner_name} загрузил «{first_file['name'] if first_file else title}»", "time": _format_changed_label(raw.get("updated_at", ""), seed)},
+        {"dot": "blue", "text": f"{access_users[3]['name']} обновил материал в папке", "time": _format_changed_label(section_docs[0]["updated_at"], seed + 1) if section_docs else _format_changed_label(raw.get("updated_at", ""), seed + 1)},
+        {"dot": "orange", "text": "Запрос на доступ одобрен", "time": _format_changed_label(section_docs[1]["updated_at"], seed + 2) if len(section_docs) > 1 else _format_changed_label(raw.get("updated_at", ""), seed + 2)},
+        {"dot": "gray", "text": f"{access_users[1]['name']} изменил права в папке «{_PROJECT_FOLDER_NAMES[1][0]}»", "time": _format_changed_label(section_docs[2]["updated_at"], seed + 3) if len(section_docs) > 2 else _format_changed_label(raw.get("updated_at", ""), seed + 3)},
+    ]
+
+    return {
+        "id": project_id,
+        "title": title,
+        "subtitle": _PROJECT_SUBTITLES[seed % len(_PROJECT_SUBTITLES)],
+        "badges": badges,
+        "owner": {
+            "name": owner_name,
+            "initials": _doc_initials(owner_name),
+            "avatar": (owner_expert or {}).get("avatar", ""),
+        },
+        "file_count": 40 + seed % 220,
+        "updated_label": f"Обновлено {_format_changed_label(raw.get('updated_at', ''), seed).lower()}",
+        "about": (raw.get("body", "").split("\n\n")[0] or base["excerpt"]),
+        "tags": (raw.get("tags") or [])[:4],
+        "access_count": 4 + seed % 4,
+        "access_users": access_users,
+        "activity": activity,
+        "items": items,
+        "breadcrumbs": [
+            {"label": "База знаний", "href": "knowledge.html"},
+            {"label": "Проекты", "href": "knowledge.html?q=Проект"},
+            {"label": title},
+        ],
+    }
+
+
+@app.get("/api/projects")
+def list_projects() -> dict:
+    section_projects = _section_project_ids()
+    projects = []
+    for doc in corpus.documents:
+        if not _is_project_doc(doc, section_projects):
+            continue
+        base = serialize_document(doc, section_projects)
+        seed = sum(ord(c) for c in doc["id"])
+        projects.append({
+            "id": doc["id"],
+            "title": doc["title"].split(" · ")[0].strip(),
+            "subtitle": _PROJECT_SUBTITLES[seed % len(_PROJECT_SUBTITLES)],
+            "file_count": 40 + seed % 220,
+            "owner": base["author"],
+            "updated_label": f"Обновлено {_format_changed_label(doc.get('updated_at', ''), seed).lower()}",
+        })
+    return {"projects": projects}
+
+
+@app.get("/api/projects/{project_id}")
+def get_project(project_id: str) -> dict:
+    project = _build_project(project_id)
+    if not project:
+        raise HTTPException(404, "Проект не найден")
+    return project
+
+
+EXP_DEPARTMENTS = [
+    "Проектный офис", "Технологии", "Контент", "Продажи", "HR", "Операции",
+    "Аналитика", "Качество", "ИБ", "Коммуникации", "Финансы", "Цифровизация",
+]
+EXP_SPECIALIZATIONS = [
+    "Управление проектами", "Операционная эффективность", "Данные и ИИ",
+    "Интеграции", "Контент и знания", "Продажи и кейсы",
+]
+EXP_ROLES = [
+    "Руководитель проектного офиса", "Архитектор процессов", "Методолог PMO",
+    "Руководитель программ", "Технический писатель", "Руководитель интеграций",
+    "Аналитик данных", "Эксперт по качеству", "Куратор знаний", "Product owner",
+]
+EXP_SKILL_POOL = [
+    "операционная модель", "регламенты", "PMO", "процессы", "интеграции", "API",
+    "данные", "ИИ", "онбординг", "кейсы", "модерация", "roadmap", "UX", "аудит", "шаблоны",
+]
+EXP_FIRST = [
+    "Наталья", "Игорь", "Дарья", "Андрей", "Елена", "Денис", "Павел", "Ольга",
+    "Сергей", "Анна", "Михаил", "Юлия", "Алексей", "Мария", "Виктор", "София",
+]
+EXP_LAST = [
+    "Морозова", "Никонов", "Орлова", "Козлов", "Петрова", "Смирнов", "Волков", "Лебедева",
+    "Семёнов", "Васильева", "Орлов", "Крылова", "Назаров", "Ахметов", "Данилов", "Морозов",
+]
+EXP_ACTIVITY = [
+    {"type": "publish", "text": "опубликовал новый материал"},
+    {"type": "update", "text": "обновил 3 материала"},
+    {"type": "join", "text": "присоединился как новый эксперт"},
+    {"type": "verify", "text": "прошёл верификацию"},
+]
+
+
+def _exp_hash(s: str) -> int:
+    h = 0
+    for c in s:
+        h = (h * 31 + ord(c)) & 0xFFFFFFFF
+    return h
+
+
+def _exp_initials(name: str) -> str:
+    parts = name.split()
+    return "".join(p[0] for p in parts[:2]).upper()
+
+
+def _enrich_expert(exp: dict, idx: int) -> dict:
+    seed = _exp_hash(exp.get("id") or exp.get("name") or str(idx))
+    dept = exp.get("department") or EXP_DEPARTMENTS[seed % len(EXP_DEPARTMENTS)]
+    spec = EXP_SPECIALIZATIONS[(seed + 3) % len(EXP_SPECIALIZATIONS)]
+    doc_count = max(1, sum(1 for d in corpus.documents if exp["name"] in d.get("body", "")))
+    base_docs = doc_count if doc_count > 1 else 8 + (seed % 90)
+    views = base_docs * (120 + (seed % 380))
+    verified = 88 + (seed % 12)
+    is_top = idx < 12 or seed % 7 == 0
+    is_new = seed % 11 == 0
+    active_today = seed % 5 == 0 or idx < 4
+    skills = exp.get("skills") or [
+        EXP_SKILL_POOL[seed % len(EXP_SKILL_POOL)],
+        EXP_SKILL_POOL[(seed + 1) % len(EXP_SKILL_POOL)],
+        EXP_SKILL_POOL[(seed + 2) % len(EXP_SKILL_POOL)],
+    ]
+    skills = skills[: 2 + (seed % 2)]
+    return {
+        "id": exp.get("id") or f"exp-gen-{idx}",
+        "name": exp["name"],
+        "role": exp.get("role") or EXP_ROLES[seed % len(EXP_ROLES)],
+        "department": dept,
+        "specialization": spec,
+        "skills": skills,
+        "avatar": exp.get("avatar", ""),
+        "initials": _exp_initials(exp["name"]),
+        "doc_count": base_docs,
+        "views": views,
+        "verified_pct": verified,
+        "is_verified": verified >= 90 or idx < 20,
+        "is_top": is_top,
+        "is_new": is_new,
+        "active_today": active_today,
+        "subscribed": seed % 9 == 0,
+        "last_active_hours": (seed % 8) if active_today else 12 + (seed % 72),
+        "activity_score": base_docs * 10 + views / 50 + (200 if active_today else 0),
+    }
+
+
+def _generate_all_experts() -> list[dict]:
+    real = [_enrich_expert(e, i) for i, e in enumerate(corpus.experts)]
+    seen = {e["name"] for e in real}
+    generated: list[dict] = []
+    i = 0
+    while len(real) + len(generated) < 348:
+        fn = EXP_FIRST[i % len(EXP_FIRST)]
+        ln = EXP_LAST[(i // len(EXP_FIRST)) % len(EXP_LAST)]
+        suffix = i // (len(EXP_FIRST) * len(EXP_LAST))
+        name = f"{ln} {fn}" + (f" {suffix}" if suffix else "")
+        if name not in seen:
+            seen.add(name)
+            seed = _exp_hash(name)
+            generated.append(
+                _enrich_expert(
+                    {
+                        "id": f"exp-gen-{len(real) + len(generated)}",
+                        "name": name,
+                        "role": EXP_ROLES[seed % len(EXP_ROLES)],
+                        "department": EXP_DEPARTMENTS[seed % len(EXP_DEPARTMENTS)],
+                        "skills": [
+                            EXP_SKILL_POOL[seed % len(EXP_SKILL_POOL)],
+                            EXP_SKILL_POOL[(seed + 2) % len(EXP_SKILL_POOL)],
+                        ],
+                    },
+                    len(real) + len(generated),
+                )
+            )
+        i += 1
+        if i > 5000:
+            break
+    return sorted(real + generated, key=lambda x: -x["activity_score"])
+
+
+@app.get("/api/experts")
+def list_experts(
+    q: str = Query("", max_length=200),
+    department: str = Query(""),
+    specialization: str = Query(""),
+    status: str = Query(""),
+    sort: str = Query("activity"),
+    page: int = Query(1, ge=1),
+    limit: int = Query(12, ge=6, le=24),
+) -> dict:
+    all_experts = _generate_all_experts()
+    total_docs = sum(e["doc_count"] for e in all_experts)
+    verified_count = sum(1 for e in all_experts if e["is_verified"])
+    dept_counts: dict[str, int] = {}
+    for e in all_experts:
+        dept_counts[e["department"]] = dept_counts.get(e["department"], 0) + 1
+    by_department = sorted(
+        [{"name": k, "count": v} for k, v in dept_counts.items()],
+        key=lambda x: -x["count"],
+    )[:8]
+
+    filtered = all_experts[:]
+    qn = q.strip().lower()
+    if qn:
+        filtered = [
+            e for e in filtered
+            if qn in e["name"].lower()
+            or qn in e["role"].lower()
+            or qn in e["department"].lower()
+            or any(qn in s.lower() for s in e["skills"])
+        ]
+    if department:
+        filtered = [e for e in filtered if e["department"] == department]
+    if specialization:
+        filtered = [e for e in filtered if e["specialization"] == specialization]
+    if status == "verified":
+        filtered = [e for e in filtered if e["is_verified"]]
+    elif status == "top":
+        filtered = [e for e in filtered if e["is_top"]]
+    elif status == "new":
+        filtered = [e for e in filtered if e["is_new"]]
+    elif status == "active":
+        filtered = [e for e in filtered if e["active_today"]]
+
+    if sort == "name":
+        filtered.sort(key=lambda e: e["name"])
+    elif sort == "docs":
+        filtered.sort(key=lambda e: -e["doc_count"])
+    elif sort == "views":
+        filtered.sort(key=lambda e: -e["views"])
+
+    total = len(filtered)
+    pages = max(1, (total + limit - 1) // limit)
+    page = min(page, pages)
+    slice_ = filtered[(page - 1) * limit : page * limit]
+
+    activity = []
+    for i in range(6):
+        exp = all_experts[i * 3 + 1] if i * 3 + 1 < len(all_experts) else all_experts[i]
+        tpl = EXP_ACTIVITY[i % len(EXP_ACTIVITY)]
+        activity.append({
+            "id": f"act-{i}",
+            "name": exp["name"],
+            "action": tpl["text"],
+            "type": tpl["type"],
+            "hours_ago": 1 + (_exp_hash(exp["id"]) % 48),
+        })
+
+    return {
+        "stats": {
+            "experts": len(all_experts),
+            "materials": total_docs,
+            "verified_pct": round(verified_count / len(all_experts) * 100),
+            "departments": len(dept_counts),
+            "new_month": 12,
+        },
+        "departments": [""] + EXP_DEPARTMENTS,
+        "specializations": EXP_SPECIALIZATIONS,
+        "statuses": [
+            {"id": "", "label": "Все"},
+            {"id": "verified", "label": "Верифицированные"},
+            {"id": "top", "label": "Топ-эксперты"},
+            {"id": "new", "label": "Новые"},
+            {"id": "active", "label": "Активны сегодня"},
+        ],
+        "recent": [
+            {
+                "id": e["id"], "name": e["name"], "role": e["role"],
+                "doc_count": e["doc_count"], "initials": e["initials"],
+                "avatar": e["avatar"], "hours_ago": e["last_active_hours"],
+            }
+            for e in all_experts[:6]
+        ],
+        "top_month": [
+            {
+                "rank": i + 1, "id": e["id"], "name": e["name"],
+                "doc_count": e["doc_count"], "views": e["views"],
+                "delta": 3 + (_exp_hash(e["id"]) % 12),
+                "initials": e["initials"], "avatar": e["avatar"],
+            }
+            for i, e in enumerate(all_experts[:5])
+        ],
+        "by_department": by_department,
+        "activity": activity,
+        "experts": slice_,
+        "pagination": {"page": page, "limit": limit, "total": total, "pages": pages},
+    }
+
+
+EXP_MATERIAL_TITLES = [
+    "Гайд по операционной модели ax.files",
+    "Регламент модерации экспертных материалов",
+    "Шаблон карточки эксперта для базы знаний",
+    "Чек-лист публикации проектных материалов",
+    "Методика оценки качества контента",
+    "Протокол экспертной сети",
+]
+EXP_MONTHS = ["Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сейчас"]
+EXP_VERIFY_AREAS = [
+    "Операционная эффективность", "Управление проектами", "Контент и знания",
+    "Интеграции", "Данные и ИИ", "Продажи и кейсы",
+]
+
+
+def _expert_about(exp: dict) -> str:
+    raw = next((e for e in corpus.experts if e.get("id") == exp["id"] or e["name"] == exp["name"]), None)
+    if raw and raw.get("bio"):
+        return raw["bio"]
+    seed = _exp_hash(exp["id"])
+    skills = ", ".join(exp["skills"])
+    return (
+        f'{exp["name"]} — {exp["role"].lower()} в направлении «{exp["department"]}». '
+        f'Более {5 + (seed % 8)} лет опыта в корпоративных трансформациях и развитии практик ax.files. '
+        f"Курирует экспертную сеть, помогает командам оформлять и публиковать материалы в базе знаний. "
+        f"Специализация: {skills}."
+    )
+
+
+def _expert_materials(exp: dict) -> list[dict]:
+    linked = []
+    for i, doc in enumerate(corpus.documents):
+        if exp["name"] in doc.get("body", ""):
+            item = serialize_document(doc, _section_project_ids())
+            seed = _exp_hash(doc["id"])
+            linked.append({
+                "id": item["id"],
+                "title": item["title"],
+                "file_ext": item["file_ext"],
+                "section": item["section"],
+                "updated_at": item["updated_at"],
+                "views": 800 + (seed % 4200),
+                "status": "new" if i == 0 else ("updated" if i == 1 else ""),
+            })
+        if len(linked) >= 4:
+            break
+    if len(linked) >= 3:
+        return linked
+    seed = _exp_hash(exp["id"])
+    out = linked[:]
+    exts = ["pdf", "docx", "pptx", "pdf"]
+    for i in range(len(linked), 4):
+        s = seed + i * 17
+        out.append({
+            "id": f"mat-{exp['id']}-{i}",
+            "title": EXP_MATERIAL_TITLES[s % len(EXP_MATERIAL_TITLES)],
+            "file_ext": exts[i],
+            "section": exp["department"],
+            "updated_at": f"2025-0{4 + (i % 3)}-{10 + (s % 18)}",
+            "views": 600 + (s % 5000),
+            "status": "new" if i == 0 else ("updated" if i == 2 else ""),
+        })
+    return out
+
+
+def _expert_detail(exp_id: str) -> dict | None:
+    all_experts = _generate_all_experts()
+    exp = next((e for e in all_experts if e["id"] == exp_id), None)
+    if not exp:
+        return None
+    seed = _exp_hash(exp["id"])
+    parts = exp["name"].lower().replace(" ", ".").replace("ё", "e")
+    slug = ".".join(reversed(parts.split(".")))
+    similar = [
+        {"id": e["id"], "name": e["name"], "role": e["role"], "initials": e["initials"], "avatar": e["avatar"]}
+        for e in all_experts
+        if e["id"] != exp["id"] and (e["department"] == exp["department"] or e["specialization"] == exp["specialization"])
+    ][:3]
+    areas = [exp["specialization"], *exp["skills"][:2]]
+    return {
+        **exp,
+        "about": _expert_about(exp),
+        "verified_date": f"2024-{3 + (seed % 8):02d}-{10 + (seed % 18)}",
+        "contacts": {
+            "email": f"{slug}@company.ru",
+            "telegram": f"@{slug.replace('.', '_')}",
+            "office": f"Москва, офис {3 + (seed % 4)} · {exp['department']}",
+        },
+        "verification_areas": [
+            {
+                "name": a if a in EXP_VERIFY_AREAS else EXP_VERIFY_AREAS[(seed + i) % len(EXP_VERIFY_AREAS)],
+                "rating": f"{4.5 + ((seed + i * 7) % 6) / 10:.1f}",
+            }
+            for i, a in enumerate(areas[:3])
+        ],
+        "activity_weeks": [
+            {"label": m, "value": 20 + ((seed + i * 13) % 80), "is_current": i == len(EXP_MONTHS) - 1}
+            for i, m in enumerate(EXP_MONTHS)
+        ],
+        "materials": _expert_materials(exp),
+        "similar": similar,
+    }
+
+
+@app.get("/api/experts/{expert_id}")
+def get_expert(expert_id: str) -> dict:
+    detail = _expert_detail(expert_id)
+    if not detail:
+        raise HTTPException(404, "Эксперт не найден")
+    return detail
 
 
 @app.get("/api/search", response_model=SearchResponse)

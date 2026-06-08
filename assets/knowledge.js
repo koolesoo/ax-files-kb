@@ -137,8 +137,23 @@
     return "";
   }
 
+  function materialUrl(doc) {
+    if (!doc || !doc.id) return "#";
+    if (doc.is_project || doc.material_type === "Проект" || doc.doc_type === "project") {
+      return "project.html?id=" + encodeURIComponent(doc.id);
+    }
+    return "document.html?id=" + encodeURIComponent(doc.id);
+  }
+
   function fileIcon(ext) {
     var e = (ext || "pdf").toLowerCase();
+    if (e === "folder") {
+      return (
+        '<div class="kb-file-icon kb-file-icon--folder" aria-hidden="true">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>' +
+        "</div>"
+      );
+    }
     return (
       '<div class="kb-file-icon kb-file-icon--' +
       esc(e) +
@@ -173,15 +188,22 @@
     var tags = doc.tags || [];
     var showAllTags = tags.length > 1;
 
+    var href = materialUrl(doc);
     return (
       '<article class="kb-doc-card" data-id="' +
       esc(doc.id || "") +
+      '" data-is-project="' +
+      (doc.is_project ? "1" : "0") +
       '">' +
       fileIcon(doc.file_ext) +
       '<div class="kb-doc-card__content">' +
       '<div class="kb-doc-card__top">' +
       '<h3 class="kb-doc-card__title">' +
+      '<a href="' +
+      esc(href) +
+      '" class="kb-doc-card__link">' +
       highlightHtml(title, q) +
+      "</a>" +
       (opts.hideStatus ? "" : docStatus(doc)) +
       "</h3>" +
       "</div>" +
@@ -214,7 +236,7 @@
       '<button type="button" class="kb-icon-btn" aria-label="В избранное">' +
       '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>' +
       "</button>" +
-      '<button type="button" class="kb-icon-btn" aria-label="Ещё">' +
+      '<button type="button" class="kb-icon-btn" aria-label="Ещё" aria-haspopup="menu" aria-expanded="false" data-kb-more>' +
       '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>' +
       "</button>" +
       "</div>" +
@@ -282,7 +304,9 @@
 
   function recentCard(doc) {
     return (
-      '<article class="kb-recent-card">' +
+      '<a href="' +
+      esc(materialUrl(doc)) +
+      '" class="kb-recent-card">' +
       '<div class="kb-recent-card__icon">' +
       fileIcon(doc.file_ext) +
       "</div>" +
@@ -292,7 +316,7 @@
       '<p class="kb-recent-card__meta">' +
       esc(doc.material_type || "") +
       " · 2 часа назад</p>" +
-      "</article>"
+      "</a>"
     );
   }
 
@@ -409,8 +433,7 @@
     if (!collectionsEl) return;
     collectionsEl.innerHTML = (items || [])
       .map(function (c) {
-        return (
-          "<li class=\"kb-collection-item\">" +
+        var inner =
           '<span class="kb-collection-item__icon kb-collection-item__icon--' +
           esc(c.icon || "doc") +
           '">' +
@@ -420,8 +443,18 @@
           esc(c.title) +
           '</span><span class="kb-collection-item__count">' +
           c.count +
-          " материалов</span></li>"
-        );
+          " материалов</span>";
+        if (c.project_id) {
+          return (
+            '<li class="kb-collection-item">' +
+            '<a href="project.html?id=' +
+            encodeURIComponent(c.project_id) +
+            '" class="kb-collection-item__link">' +
+            inner +
+            "</a></li>"
+          );
+        }
+        return "<li class=\"kb-collection-item\">" + inner + "</li>";
       })
       .join("");
   }
@@ -703,6 +736,17 @@
     });
   }
   if (askBtn) askBtn.addEventListener("click", runAsk);
+
+  document.addEventListener("click", function (e) {
+    var content = e.target.closest(".kb-doc-card__content");
+    if (!content || e.target.closest("a, button")) return;
+    var card = content.closest(".kb-doc-card");
+    var id = card && card.getAttribute("data-id");
+    if (id) {
+      var doc = findDocById(id);
+      window.location.href = doc ? materialUrl(doc) : "document.html?id=" + encodeURIComponent(id);
+    }
+  });
 
   var params = new URLSearchParams(window.location.search);
   var initialQ = params.get("q");

@@ -1,4 +1,6 @@
-import { handleDocuments } from "./lib/documents.mjs";
+import { handleDocuments, handleDocumentDetail } from "./lib/documents.mjs";
+import { handleProjects, handleProjectDetail } from "./lib/projects.mjs";
+import { handleExperts, handleExpertDetail } from "./lib/experts.mjs";
 import { handleSearch } from "./lib/search.mjs";
 import { handleAsk } from "./lib/ask.mjs";
 import { getCorpus } from "./lib/corpus.mjs";
@@ -44,6 +46,45 @@ export default async (request) => {
 
     if (path === "/api/documents" && request.method === "GET") {
       return json(handleDocuments());
+    }
+
+    const docDetail = path.match(/^\/api\/documents\/([^/]+)$/);
+    if (docDetail && request.method === "GET") {
+      const detail = handleDocumentDetail(decodeURIComponent(docDetail[1]));
+      if (!detail) return err("Документ не найден", 404);
+      return json(detail);
+    }
+
+    if (path === "/api/projects" && request.method === "GET") {
+      return json(handleProjects());
+    }
+
+    const projectDetail = path.match(/^\/api\/projects\/([^/]+)$/);
+    if (projectDetail && request.method === "GET") {
+      const detail = handleProjectDetail(decodeURIComponent(projectDetail[1]));
+      if (!detail) return err("Проект не найден", 404);
+      return json(detail);
+    }
+
+    const expertDetail = path.match(/^\/api\/experts\/([^/]+)$/);
+    if (expertDetail && request.method === "GET") {
+      const detail = handleExpertDetail(decodeURIComponent(expertDetail[1]));
+      if (!detail) return err("Эксперт не найден", 404);
+      return json(detail);
+    }
+
+    if (path === "/api/experts" && request.method === "GET") {
+      return json(
+        handleExperts({
+          q: url.searchParams.get("q") || "",
+          department: url.searchParams.get("department") || "",
+          specialization: url.searchParams.get("specialization") || "",
+          status: url.searchParams.get("status") || "",
+          sort: url.searchParams.get("sort") || "activity",
+          page: url.searchParams.get("page") || "1",
+          limit: url.searchParams.get("limit") || "12",
+        })
+      );
     }
 
     if (path === "/api/search" && request.method === "GET") {

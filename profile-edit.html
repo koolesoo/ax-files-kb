@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/app.css" />
+  <link rel="preload" as="image" href="assets/avatars/anna-vasilyeva.webp" fetchpriority="high" />
   <link rel="stylesheet" href="assets/profile.css" />
   <link rel="stylesheet" href="assets/profile-edit.css" />
 </head>
@@ -26,37 +27,39 @@
               <input type="search" placeholder="Искать информацию" />
             </label>
             <nav class="nav-pills" aria-label="Основное меню">
-              <button type="button">
+              <a href="index.html" class="nav-pills__link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1v-9.5z" />
                 </svg>
                 <span class="nav-pills__label">Главная</span>
-              </button>
-              <button type="button">
+              </a>
+              <a href="knowledge.html" class="nav-pills__link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                   <path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5z" />
                   <path d="M8 2v4M12 2v4M16 2v4" />
                 </svg>
                 <span class="nav-pills__label">База знаний</span>
-              </button>
-              <button type="button">
+              </a>
+              <a href="experts.html" class="nav-pills__link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
                 <span class="nav-pills__label">Эксперты</span>
-              </button>
+              </a>
             </nav>
           </div>
         </div>
         <div class="topbar-actions">
-          <button type="button" class="icon-btn" aria-label="Уведомления">
+          <button type="button" class="icon-btn" aria-label="Уведомления" data-notifications-toggle>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" />
             </svg>
           </button>
-          <a href="profile.html" aria-label="Профиль" aria-current="page"><img class="avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&h=96&fit=crop" alt="" width="40" height="40" decoding="async" /></a>
+          <button type="button" class="topbar-avatar-btn is-active" data-profile-menu-toggle aria-label="Профиль" aria-current="page">
+            <img class="avatar" src="assets/avatars/anna-vasilyeva.webp" alt="" width="40" height="40" decoding="async" fetchpriority="high" loading="eager" />
+          </button>
         </div>
       </div>
     </header>
@@ -80,7 +83,7 @@
                 <div class="profile-edit-avatar__wrap">
                   <img
                     class="profile-edit-avatar__img"
-                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=256&h=256&fit=crop"
+                    src="assets/avatars/anna-vasilyeva.webp"
                     alt=""
                     width="152"
                     height="152"
@@ -107,7 +110,7 @@
                   <input class="profile-edit-field__input" type="text" id="edit-dept" name="dept" value="Департамент Бизнес-анализа" disabled />
                 </div>
               </div>
-              <p class="profile-edit-section__hint">Для изменений обратитесь в HR-отдел</p>
+              <p class="profile-edit-section__hint">Для изменения обратитесь в HR-отдел</p>
             </section>
 
             <section class="profile-edit-section" aria-labelledby="edit-contacts-heading">
@@ -125,36 +128,40 @@
                   <input class="profile-edit-field__input" type="email" id="edit-email" name="email" value="ann.riv@axfiles.com" autocomplete="email" disabled />
                 </div>
               </div>
-              <p class="profile-edit-section__hint">Для изменений обратитесь в HR-отдел</p>
+              <p class="profile-edit-section__hint">Для изменения обратитесь в HR-отдел</p>
             </section>
 
             <section class="profile-edit-section" aria-labelledby="edit-skills-heading">
               <h2 id="edit-skills-heading" class="profile-edit-section__title">Навыки</h2>
               <div class="profile-edit-skills" id="edit-skills-list" role="list">
                 <span class="profile-edit-skill" role="listitem">
-                  Бизнес-анализ
+                  <span class="profile-edit-skill__label">Бизнес-анализ</span>
                   <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык Бизнес-анализ">×</button>
                 </span>
                 <span class="profile-edit-skill" role="listitem">
-                  BPMN
+                  <span class="profile-edit-skill__label">BPMN</span>
                   <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык BPMN">×</button>
                 </span>
                 <span class="profile-edit-skill" role="listitem">
-                  Системный анализ
+                  <span class="profile-edit-skill__label">Системный анализ</span>
                   <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык Системный анализ">×</button>
                 </span>
                 <span class="profile-edit-skill" role="listitem">
-                  SQL
+                  <span class="profile-edit-skill__label">SQL</span>
                   <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык SQL">×</button>
                 </span>
                 <span class="profile-edit-skill" role="listitem">
-                  Excel
+                  <span class="profile-edit-skill__label">Excel</span>
                   <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык Excel">×</button>
                 </span>
               </div>
               <div class="profile-edit-skill-add">
                 <input class="profile-edit-field__input" type="text" id="edit-skill-input" placeholder="Добавить навык" />
-                <button type="button" class="profile-edit-skill-add__btn" id="edit-skill-add">Добавить</button>
+                <button type="button" class="profile-edit-skill-add__btn" id="edit-skill-add" aria-label="Добавить навык">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </button>
               </div>
             </section>
 
@@ -172,27 +179,27 @@
   <div class="app-tabbar" role="navigation" aria-label="Нижняя панель">
     <div class="app-tabbar__track">
       <nav class="nav-pills app-tabbar__nav" aria-label="Основное меню">
-        <button type="button">
+        <a href="index.html" class="nav-pills__link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1v-9.5z" />
           </svg>
           <span class="nav-pills__label">Главная</span>
-        </button>
-        <button type="button">
+        </a>
+        <a href="knowledge.html" class="nav-pills__link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
             <path d="M4 4v15.5A2.5 2.5 0 0 0 6.5 22H20V6a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 6.5z" />
             <path d="M8 2v4M12 2v4M16 2v4" />
           </svg>
           <span class="nav-pills__label">База знаний</span>
-        </button>
-        <button type="button">
+        </a>
+        <a href="experts.html" class="nav-pills__link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
             <circle cx="12" cy="7" r="4" />
           </svg>
           <span class="nav-pills__label">Эксперты</span>
-        </button>
+        </a>
       </nav>
       <div class="app-tabbar__search-slot">
         <label class="search app-tabbar__search" aria-label="Поиск">
@@ -249,8 +256,9 @@
         chip.className = "profile-edit-skill";
         chip.setAttribute("role", "listitem");
         chip.innerHTML =
+          '<span class="profile-edit-skill__label">' +
           text +
-          ' <button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык ' +
+          '</span><button type="button" class="profile-edit-skill__remove" aria-label="Удалить навык ' +
           text +
           '">×</button>';
         list.appendChild(chip);
@@ -325,32 +333,6 @@
     })();
   </script>
   <script>
-    (function profileNav() {
-      var topNav = document.querySelector(".topbar-cluster > .nav-pills");
-      var bottomNav = document.querySelector(".app-tabbar .app-tabbar__nav");
-      if (!topNav || !bottomNav) return;
-      var topBtns = topNav.querySelectorAll("button");
-      var botBtns = bottomNav.querySelectorAll("button");
-
-      function goHome() {
-        window.location.href = "index.html";
-      }
-      function goProfile() {
-        window.location.href = "profile.html";
-      }
-
-      topBtns.forEach(function (btn, i) {
-        btn.addEventListener("click", function () {
-          if (i === 0) goHome();
-        });
-      });
-      botBtns.forEach(function (btn, i) {
-        btn.addEventListener("click", function () {
-          if (i === 0) goHome();
-        });
-      });
-    })();
-
     (function syncDualSearchInputs() {
       var topIn = document.querySelector(".topbar-cluster > .search input");
       var botIn = document.querySelector(".app-tabbar__search input");
@@ -364,5 +346,7 @@
       mirror(botIn, topIn);
     })();
   </script>
+  <script src="assets/notifications-panel.js"></script>
+  <script src="assets/profile-menu.js"></script>
 </body>
 </html>

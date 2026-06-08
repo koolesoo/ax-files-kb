@@ -1,0 +1,444 @@
+.my-pubs-page {
+  padding-top: clamp(0.85rem, 2.5vw, 1.5rem);
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.my-pubs-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.my-pubs-breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.my-pubs-breadcrumb a:hover {
+  color: var(--text);
+}
+
+.my-pubs-breadcrumb__sep {
+  color: var(--text-tertiary);
+}
+
+.my-pubs-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.my-pubs-head__title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.my-pubs-head__sub {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.my-pubs-publish {
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  padding: 0.6rem 1.15rem;
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.my-pubs-publish:hover {
+  transform: none;
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.my-pubs-stats {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.my-pubs-stats__item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0 1.5rem;
+  min-width: 7rem;
+}
+
+.my-pubs-stats__item:first-child {
+  padding-left: 0;
+}
+
+.my-pubs-stats__item + .my-pubs-stats__item {
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.my-pubs-stats__value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.my-pubs-stats__value--accent {
+  color: #ff6500;
+}
+
+.my-pubs-stats__label {
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+.my-pubs-filters {
+  margin-bottom: 1.1rem;
+}
+
+.my-pubs-filters .nav-pills button.is-active {
+  background: #111827;
+  color: #fff;
+  box-shadow: none;
+}
+
+.my-pubs-filters .nav-pills button.is-active:hover {
+  background: #111827;
+  color: #fff;
+}
+
+.my-pubs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.my-pub-card {
+  padding: 1rem 1.15rem 1.05rem;
+  background: #eae8e4;
+  border-radius: var(--radius-lg);
+}
+
+.my-pub-card[hidden] {
+  display: none;
+}
+
+.my-pub-card__row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto auto;
+  gap: 0.85rem 1rem;
+  align-items: start;
+}
+
+.my-pub-card__icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 52px;
+  border-radius: 10px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  flex-shrink: 0;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.my-pub-card__icon--pdf { background: #ef4444; }
+.my-pub-card__icon--docx { background: #2563eb; }
+.my-pub-card__icon--xlsx { background: #16a34a; }
+.my-pub-card__icon--pptx { background: #ea580c; }
+.my-pub-card__icon--draft {
+  background: #fff;
+  color: var(--text-secondary);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.my-pub-card__body {
+  min-width: 0;
+  grid-column: 2;
+}
+
+.my-pub-card__stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  padding-top: 0.1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  grid-column: 3;
+}
+
+.my-pub-card__stats-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.my-pub-card__stats-item svg {
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.my-pub-card__menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  align-self: start;
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.my-pub-card__menu:hover {
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--text);
+}
+
+.my-pub-card__title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.my-pub-card__title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+.my-pub-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.my-pub-card__title a:hover {
+  color: var(--accent);
+}
+
+.my-pub-status {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.my-pub-status--published {
+  background: rgba(34, 197, 94, 0.15);
+  color: #15803d;
+}
+
+.my-pub-status--verification {
+  background: rgba(249, 115, 22, 0.15);
+  color: #c2410c;
+}
+
+.my-pub-status--rejected {
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+}
+
+.my-pub-status--draft {
+  background: rgba(107, 114, 128, 0.14);
+  color: #4b5563;
+}
+
+.my-pub-card__meta {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.my-pub-card__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.my-pub-card__meta-item svg {
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+.my-pub-card__panel {
+  margin: 0.85rem 0 0 calc(44px + 1rem);
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.my-pub-card__panel--verification {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(249, 115, 22, 0.18);
+}
+
+.my-pub-card__panel--rejected {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.my-pub-card__panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.my-pub-card__panel-est {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.my-pub-card__progress {
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(249, 115, 22, 0.18);
+  overflow: hidden;
+}
+
+.my-pub-card__progress-bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #ff6500;
+}
+
+.my-pub-card__panel-text {
+  margin: 0 0 0.55rem;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.my-pub-card__panel-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.my-pub-card__panel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #ff6500;
+  text-decoration: none;
+}
+
+.my-pub-card__panel-link:hover {
+  text-decoration: underline;
+}
+
+.my-pub-card__draft-actions {
+  margin-top: 0.75rem;
+}
+
+.my-pub-card__continue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.95rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  transition: background 0.15s ease;
+}
+
+.my-pub-card__continue:hover {
+  background: #f9fafb;
+}
+
+@media (max-width: 720px) {
+  .my-pubs-stats__item {
+    flex: 1 1 calc(50% - 0.5rem);
+    border-left: none !important;
+    padding: 0.35rem 0;
+  }
+
+  .my-pub-card__row {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+  }
+
+  .my-pub-card__stats {
+    grid-column: 2;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 0.5rem;
+  }
+
+  .my-pub-card__menu {
+    grid-row: 1;
+    grid-column: 3;
+  }
+
+  .my-pub-card__panel {
+    margin-left: 0;
+  }
+}
